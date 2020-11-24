@@ -5,10 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ExtremelySimpleLogger" Version="1.1.0"/>
-        <PackageReference Include="MLEM.Data" Version="4.3.0-7"/>
-        <PackageReference Include="TinyLifeApi" Version="1.0.0"/>
-        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641"/>
+        <PackageReference Include="ExtremelySimpleLogger" Version="1.1.0" />
+        <PackageReference Include="MLEM.Data" Version="4.3.0-7" />
+        <PackageReference Include="TinyLifeApi" Version="1.0.0" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     </ItemGroup>
 
     <ItemGroup>
