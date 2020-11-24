@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ExtremelySimpleLogger" Version="1.1.0"/>
+        <PackageReference Include="MLEM.Data" Version="4.3.0-7"/>
+        <PackageReference Include="TinyLifeApi" Version="1.0.0"/>
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="./Content/**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>
