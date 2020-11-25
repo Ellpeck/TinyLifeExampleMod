@@ -9,6 +9,8 @@
 
         <PackageReference Include="ExtremelySimpleLogger" Version="1.1.0" />
         <PackageReference Include="MLEM.Data" Version="4.3.0-7" />
+        <PackageReference Include="MLEM.Extended" Version="4.0.0" />
+        <PackageReference Include="MLEM.Startup" Version="4.2.0-298" />
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     </ItemGroup>
 
