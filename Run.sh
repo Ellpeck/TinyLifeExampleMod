@@ -8,5 +8,5 @@ dotnet build
 cp ./bin/Debug/netcoreapp3.0/* "$LOCALAPPDATA/Tiny Life/Mods" -r
 
 # run the game
-cd $GAME_DIR
+cd "$GAME_DIR"
 "./Tiny Life.exe"

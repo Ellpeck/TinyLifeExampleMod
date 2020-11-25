@@ -24,7 +24,7 @@ namespace ExampleMod {
 
         public override void AddGameContent(GameImpl game) {
             // adding a custom furniture item
-            FurnitureType.Register(new FurnitureType.TypeSettings("CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
+            FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
                 Construct = (i, t, c, m, p) => new CustomTable(i, t, c, m, p)
             });
         }
