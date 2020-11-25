@@ -20,5 +20,8 @@ This repository also contains a little script called `Run.sh` that you can use t
 ## Distributing mods
 To distribute your mod to other people, all you have to do is go into the `bin/Debug/netcoreapp3.0` folder after building and copy your mod's `dll` and the `Content` directory. You can either send them to your friends directly or pack them into an archive first.
 
+## Updating mods
+To change 
+
 ## Where's the source code?
 The NuGet package for the Tiny Life API just contains a [reference assembly](https://docs.microsoft.com/en-us/dotnet/standard/assembly/reference-assemblies) so that people can't just download the game from NuGet and play it. If you want to see the game's *full* source code, all you have to do is open the `Tiny Life.dll` that you downloaded [on itch](https://ellpeck.itch.io/tiny-life) in your IDE.
