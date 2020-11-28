@@ -1,7 +1,7 @@
-# TinyLifeExampleMod
+# Tiny Life Example Mod
 An example mod for my game Tiny Life. Fork this repository if you make a mod so people can easily find it!
 
-# Installing Mods
+# Installing mods
 Installing a mod is pretty simple:
 - Find the `Tiny Life` folder in your local app data (On Windows, just type `%localappdata%` into your search)
 - Find the `Mods` folder in there
@@ -10,7 +10,7 @@ Installing a mod is pretty simple:
 
 Done! Now just start the game and the mod should automatically load. If there are any errors, they'll be logged in the `Log.txt` file in the `Tiny Life` folder.
 
-# Creating Mods
+# Creating mods
 To create a mod, all you have to do is fork this repository and open the project contained in it using Visual Studio, Rider or any other kind of C# IDE. The code that is already there contains some examples. Once you're done checking them out, you can just delete them and start fresh.
 
 Since Tiny Life uses early versions of some of my libraries, you will also have to add [my server](https://nuget.ellpeck.de/) to your NuGet config. You can do so using the following command:
@@ -26,7 +26,26 @@ This repository also contains a little script called `Run.sh` that you can use t
 To distribute your mod to other people, all you have to do is go into the `bin/Debug/netcoreapp3.0` folder after building and copy your mod's `dll` and the `Content` directory. You can either send them to your friends directly or pack them into an archive first.
 
 ## Updating mods
-To change the version of Tiny Life that your mod is compiled against, simply go into the `csproj` file and change the `TinyLifeApi` version. Note that some other dependencies might also have been updated, which needs to be taken into account. [The project file in this repo](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj) always has the same dependencies as the most recent version of the game.
+To change the version of Tiny Life that your mod is compiled against, simply go into [the project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj) and change the `TinyLifeApi` version. Note that some other dependencies might also have been updated, which needs to be [taken into account](https://github.com/Ellpeck/TinyLifeExampleMod#version-history).
 
 ## Where's the source code?
 The NuGet package for the Tiny Life API just contains a [reference assembly](https://docs.microsoft.com/en-us/dotnet/standard/assembly/reference-assemblies) so that people can't just download the game from NuGet and play it. If you want to see the game's *full* source code, all you have to do is open the `Tiny Life.dll` that you downloaded [on itch](https://ellpeck.itch.io/tiny-life) in your IDE.
+
+## Dependency version history
+Since the mod is compiled against the same dependencies as Tiny Life, it also needs to have the same versions of those dependencies for mods to work correctly with the game. The following is a list of versions of Tiny Life and the appropriate dependency versions that the mod should be compiled against to work for that version. When updating your mod, you can just copy the appropriate part [into your project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj#L10-L15).
+```xml
+<!-- Tiny Life 0.3+ -->
+<PackageReference Include="ExtremelySimpleLogger" Version="1.2.1" />
+<PackageReference Include="MLEM.Data" Version="4.3.0-8" />
+<PackageReference Include="MLEM.Extended" Version="4.3.0-8" />
+<PackageReference Include="MLEM.Startup" Version="4.3.0-8" />
+<PackageReference Include="MonoGame.Extended" Version="3.8.0" />
+<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+
+<!-- Tiny Life 0.2.x -->
+<PackageReference Include="ExtremelySimpleLogger" Version="1.1.0" />
+<PackageReference Include="MLEM.Data" Version="4.3.0-7" />
+<PackageReference Include="MLEM.Extended" Version="4.0.0" />
+<PackageReference Include="MLEM.Startup" Version="4.2.0-298" />
+<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+```
