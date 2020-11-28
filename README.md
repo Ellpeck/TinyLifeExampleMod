@@ -1,4 +1,4 @@
-# TinyLifeExampleMod
+O g# TinyLifeExampleMod
 An example mod for my game Tiny Life. Fork this repository if you make a mod so people can easily find it!
 
 # Installing Mods
@@ -15,7 +15,7 @@ To create a mod, all you have to do is fork this repository and open the project
 
 Since Tiny Life uses early versions of some of my libraries, you will also have to add [my server](https://nuget.ellpeck.de/) to your NuGet config. You can do so using the following command:
 ```
-nuget sources Add -Name "Ellpeck" -Source https://nuget.ellpeck.de/
+dotnet nuget add source https://nuget.ellpeck.de/v3/index.json --name "Ellpeck"
 ```
 
 This repository also contains a little script called `Run.sh` that you can use to automatically build your mod, copy it into the `Mods` directory of your Tiny Life instance and run the game. Just be sure to modify all of the paths first.
