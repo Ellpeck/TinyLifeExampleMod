@@ -34,7 +34,7 @@ The NuGet package for the Tiny Life API just contains a [reference assembly](htt
 ## Dependency version history
 Since the mod is compiled against the same dependencies as Tiny Life, it also needs to have the same versions of those dependencies for mods to work correctly with the game. The following is a list of versions of Tiny Life and the appropriate dependency versions that the mod should be compiled against to work for that version. When updating your mod, you can just copy the appropriate part [into your project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj#L10-L15).
 ```xml
-<!-- Tiny Life 0.3+ -->
+<!-- Tiny Life 0.2.2+ -->
 <PackageReference Include="ExtremelySimpleLogger" Version="1.2.1" />
 <PackageReference Include="MLEM.Data" Version="4.3.0-8" />
 <PackageReference Include="MLEM.Extended" Version="4.3.0-8" />
@@ -42,7 +42,7 @@ Since the mod is compiled against the same dependencies as Tiny Life, it also ne
 <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
 <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
 
-<!-- Tiny Life 0.2.x -->
+<!-- Tiny Life 0.2.1 -->
 <PackageReference Include="ExtremelySimpleLogger" Version="1.1.0" />
 <PackageReference Include="MLEM.Data" Version="4.3.0-7" />
 <PackageReference Include="MLEM.Extended" Version="4.0.0" />
