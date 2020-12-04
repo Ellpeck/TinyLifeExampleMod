@@ -29,7 +29,9 @@ To distribute your mod to other people, all you have to do is go into the `bin/D
 To change the version of Tiny Life that your mod is compiled against, simply go into [the project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj) and change the `TinyLifeApi` version. Note that some other dependencies might also have been updated, which needs to be [taken into account](https://github.com/Ellpeck/TinyLifeExampleMod#dependency-version-history).
 
 ## Where's the source code?
-The NuGet package for the Tiny Life API just contains a [reference assembly](https://docs.microsoft.com/en-us/dotnet/standard/assembly/reference-assemblies) so that people can't just download the game from NuGet and play it. If you want to see the game's *full* source code, all you have to do is open the `Tiny Life.dll` that you downloaded [on itch](https://ellpeck.itch.io/tiny-life) in your IDE.
+The NuGet package for the Tiny Life API just contains a [reference assembly](https://docs.microsoft.com/en-us/dotnet/standard/assembly/reference-assemblies) so that people can't just download the game from NuGet and play it. Since most of the public API is documented, you won't have to look at the source code in most cases, anyway.
+
+Technically, you can download the game [from itch](https://ellpeck.itch.io/tiny-life) and then decompile it to see the implementation's code, but due to its license, copying it is not allowed.
 
 ## Dependency version history
 Since the mod is compiled against the same dependencies as Tiny Life, it also needs to have the same versions of those dependencies for mods to work correctly with the game. The following is a list of versions of Tiny Life and the appropriate dependency versions that the mod should be compiled against to work for that version. When updating your mod, you can just copy the appropriate part [into your project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj#L10-L15).
