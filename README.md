@@ -3,7 +3,7 @@ An example mod for my game Tiny Life. Use this template repository to create you
 
 # Installing mods
 Installing a mod is pretty simple:
-- Find the `Tiny Life` folder in your local app data (On Windows, just type `%localappdata%` into your search)
+- Find the `Tiny Life` folder (you can open it from the game's options menu)
 - Find the `Mods` folder in there
 - If you received the mod you want to install as a `zip` (or any other kind of) archive, extract it first
 - Put the mod's `dll` as well as its `Content` folder into the `Mods` folder.
