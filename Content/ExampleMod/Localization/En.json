@@ -1,5 +1,8 @@
 {
     "BuildMode": {
         "ExampleMod.CustomTable": "Custom Table"
+    },
+    "Clothes": {
+        "ExampleMod.DarkShirt": "Dark Shirt"
     }
 }

@@ -1,5 +1,5 @@
 # Tiny Life Example Mod
-An example mod for my game Tiny Life. Fork this repository if you make a mod so people can easily find it!
+An example mod for my game Tiny Life. Use this template repository to create your own mod!
 
 # Installing mods
 Installing a mod is pretty simple:
@@ -11,7 +11,7 @@ Installing a mod is pretty simple:
 Done! Now just start the game and the mod should automatically load. If there are any errors, they'll be logged in the `Log.txt` file in the `Tiny Life` folder.
 
 # Creating mods
-To create a mod, all you have to do is fork this repository and open the project contained in it using Visual Studio, Rider or any other kind of C# IDE. The code that is already there contains some examples. Once you're done checking them out, you can just delete them and start fresh.
+To create a mod, all you have to do is create a repository [from this template](https://github.com/Ellpeck/TinyLifeExampleMod/generate) and open the project contained in it using Visual Studio, Rider or any other kind of C# IDE. The code that is already there contains some examples. Once you're done checking them out, you can just delete them and start fresh.
 
 Since Tiny Life uses early versions of some of my libraries, you will also have to add [my server](https://nuget.ellpeck.de/) to your NuGet config. You can do so using the following command:
 ```
