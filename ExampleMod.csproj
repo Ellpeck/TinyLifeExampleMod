@@ -20,11 +20,4 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Tiny Life, Version=0.3.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\TinyLife\bin\Debug\Tiny Life.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>
