@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using ExtremelySimpleLogger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Data;
 using MLEM.Data.Content;
-using MLEM.Misc;
 using MLEM.Textures;
 using TinyLife;
 using TinyLife.Mods;
