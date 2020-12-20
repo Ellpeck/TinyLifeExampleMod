@@ -20,7 +20,6 @@ namespace ExampleMod {
         public override string Name => "Example Mod";
         public override string Description => "This is the example mod for Tiny Life!";
 
-        private DataTextureAtlas customFurniture;
         private UniformTextureAtlas customClothes;
         private UniformTextureAtlas customClothesIcons;
 
@@ -37,22 +36,21 @@ namespace ExampleMod {
                 ColorScheme.WarmDark));
         }
 
-        public override void Initialize(Logger logger, RawContentManager content) {
+        public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker) {
             Logger = logger;
 
-            // loads the custom furniture texture atlas
-            // the texture atlas combines the png texture and the .atlas information
-            // see https://mlem.ellpeck.de/api/MLEM.Data.DataTextureAtlas.html for more info
-            this.customFurniture = content.LoadTextureAtlas("CustomFurniture");
-
             // loads a texture atlas with the given amount of separate texture regions in the x and y axes
-            this.customClothes = new UniformTextureAtlas(content.Load<Texture2D>("CustomClothes"), 4, 6);
-            this.customClothesIcons = new UniformTextureAtlas(content.Load<Texture2D>("CustomClothesIcons"), 16, 16);
+            // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
+            texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 6));
+            texturePacker.Add(content.Load<Texture2D>("CustomClothesIcons"), r => this.customClothesIcons = new UniformTextureAtlas(r, 16, 16));
         }
 
-        public override IEnumerable<DataTextureAtlas> GetCustomFurnitureTextures() {
+        public override IEnumerable<string> GetCustomFurnitureTextures() {
             // tell the game about our custom furniture texture
-            yield return this.customFurniture;
+            // this needs to be a path to a data texture atlas, relative to our "Content" directory
+            // the texture atlas combines the png texture and the .atlas information
+            // see https://mlem.ellpeck.de/api/MLEM.Data.DataTextureAtlas.html for more info
+            yield return "CustomFurniture";
         }
 
     }

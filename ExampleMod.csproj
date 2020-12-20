@@ -5,12 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLifeApi" Version="0.3.0" />
+        <PackageReference Include="TinyLifeApi" Version="0.3.1" />
 
         <PackageReference Include="ExtremelySimpleLogger" Version="1.2.1" />
-        <PackageReference Include="MLEM.Data" Version="4.3.0-8" />
-        <PackageReference Include="MLEM.Extended" Version="4.3.0-8" />
-        <PackageReference Include="MLEM.Startup" Version="4.3.0-8" />
+        <PackageReference Include="MLEM.Data" Version="4.3.0-20" />
+        <PackageReference Include="MLEM.Extended" Version="4.3.0-20" />
+        <PackageReference Include="MLEM.Startup" Version="4.3.0-20" />
         <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     </ItemGroup>
