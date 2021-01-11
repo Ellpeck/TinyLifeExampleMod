@@ -21,7 +21,6 @@ namespace ExampleMod {
         public override string Description => "This is the example mod for Tiny Life!";
 
         private UniformTextureAtlas customClothes;
-        private UniformTextureAtlas customClothesIcons;
 
         public override void AddGameContent(GameImpl game) {
             // adding a custom furniture item
@@ -32,17 +31,15 @@ namespace ExampleMod {
             // adding custom clothing
             Clothes.Register(new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
                 this.customClothes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                this.customClothesIcons[0, 0], // the region to use for the icon in the character editor
                 ColorScheme.WarmDark));
         }
 
         public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker) {
             Logger = logger;
-
+            
             // loads a texture atlas with the given amount of separate texture regions in the x and y axes
             // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
             texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 6));
-            texturePacker.Add(content.Load<Texture2D>("CustomClothesIcons"), r => this.customClothesIcons = new UniformTextureAtlas(r, 16, 16));
         }
 
         public override IEnumerable<string> GetCustomFurnitureTextures() {
