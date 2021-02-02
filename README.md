@@ -20,7 +20,7 @@ dotnet nuget add source https://nuget.ellpeck.de/v3/index.json --name "Ellpeck"
 
 This repository also contains a little script called `Run.sh` that you can use to automatically build your mod, copy it into the `Mods` directory of your Tiny Life instance and run the game. Just be sure to modify all of the paths first.
 
-The game's API is currently in the process of being documented. This documentation is easily accessible by opening any of the API's files in your IDE. In the future, there will additionally be a web version of the API documentation.
+The game's API is **fully documented**. The documentation is easily accessible by opening any of the API's files in your IDE. There's also a CTRL-F-able version available [on the wiki](https://github.com/Ellpeck/TinyLifeExampleMod/wiki/API-Documentation).
 
 ## Distributing mods
 To distribute your mod to other people, all you have to do is go into the `bin/Debug/netcoreapp3.0` folder after building and copy your mod's `dll` and the `Content` directory. You can either send them to your friends directly or pack them into an archive first.
