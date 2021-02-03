@@ -35,3 +35,23 @@ Technically, you can download the game [from itch](https://ellpeck.itch.io/tiny-
 
 ## Dependency version history
 Since the mod is compiled against the same dependencies as Tiny Life, it also needs to have the same versions of those dependencies for mods to work correctly with the game. Each update to this repository is [tagged](https://github.com/Ellpeck/TinyLifeExampleMod/tags) with the game's version number. If you want to develop for a certain version, just check that tag's [project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj) to see the required dependency versions.
+
+# Testing Cheats
+You can open up the game's cheat menu by pressing the `F1` key. Here is a list of some of the more useful cheats for mod development and testing. Keep in mind that `[arguments]` need to be replaced with your custom value.
+- `ShowNonBuyable` allows you to buy plates, pots and the like
+- `Need [name] [percentage <= 1]` changes the current person's needs 
+    - `NoNeed` stops need reduction for everyone
+    - `Needless` fills all needs back up
+    - `Needy` reduces all needs to zero
+- `EditWorld` allows you to place things outside of lots
+- `IgnorePlacementRules` allows you to place colliding furniture
+- `EditPerson` opens a character editor with all functionality enabled
+- `Gib` gives you 10,000 tiny bucks
+- `ExtremelyFast` allows you to select the 15x speed option all the time
+- `Skill [name] [level]` sets the current person's skill level
+- `Held [object name or null]` sets the current person's held object
+- `Job [name] [level]` stes the current person's job and job level
+- `Die` kills the current person
+- `Emotion [modifier name] [level] [seconds]` adds an emotion modifier to the current person
+- `Friendship [name without spaces] [percentage <= 1]` sets the friendship level between the named partner and the current person
+- `Romance [name without spaces] [percentage <= 1]` sets the romance level between the named partner and the current person
