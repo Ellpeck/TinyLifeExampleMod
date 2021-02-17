@@ -18,7 +18,7 @@ Since Tiny Life uses early versions of some of my libraries, you will also have 
 dotnet nuget add source https://nuget.ellpeck.de/v3/index.json --name "Ellpeck"
 ```
 
-This repository also contains a little script called `Run.sh` that you can use to automatically build your mod, copy it into the `Mods` directory of your Tiny Life instance and run the game. Just be sure to modify all of the paths first.
+This repository also contains a little `Run` script for [windows](./Run.bat) and [linux and mac](./Run.sh) that automatically builds your mod, copies it into the `Mods` directory of your Tiny Life instance and runs the game. Note that the script will only work correctly if you've previously launched Tiny Life manually.
 
 The game's API is **fully documented**. The documentation is easily accessible by opening any of the API's files in your IDE. The most updated version can be found on [the wiki](https://github.com/Ellpeck/TinyLifeExampleMod/wiki) as well.
 
