@@ -13,11 +13,6 @@ Done! Now just start the game and the mod should automatically load. If there ar
 # Creating mods
 To create a mod, all you have to do is create a repository [from this template](https://github.com/Ellpeck/TinyLifeExampleMod/generate) and open the project contained in it using Visual Studio, Rider or any other kind of C# IDE. The code that is already there contains some examples. Once you're done checking them out, you can just delete them and start fresh.
 
-Since Tiny Life uses early versions of some of my libraries, you will also have to add [my server](https://nuget.ellpeck.de/) to your NuGet config. You can do so using the following command:
-```
-dotnet nuget add source https://nuget.ellpeck.de/v3/index.json --name "Ellpeck"
-```
-
 This repository also contains a little `Run` script for [windows](./Run.bat) and [linux and mac](./Run.sh) that automatically builds your mod, copies it into the `Mods` directory of your Tiny Life instance and runs the game. Note that the script will only work correctly if you've previously launched Tiny Life manually.
 
 The game's API is **fully documented**. The documentation is easily accessible by opening any of the API's files in your IDE. The most updated version can be found on [the wiki](https://github.com/Ellpeck/TinyLifeExampleMod/wiki) as well.
