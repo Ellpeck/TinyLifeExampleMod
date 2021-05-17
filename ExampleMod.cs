@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ExtremelySimpleLogger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,9 +33,21 @@ namespace ExampleMod {
             });
 
             // adding custom clothing
-            Clothes.Register(new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
+            var darkShirt = new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
                 this.customClothes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                100, this.Icon, false, ColorScheme.WarmDark));
+                100, this.Icon, false, ColorScheme.WarmDark);
+            Clothes.Register(darkShirt);
+
+            // adding an event subscription to people
+            MapObject.OnEventsAttachable += o => {
+                if (o is Person person) {
+                    // changing the walk speed to be doubled if a person is wearing our dark shirt
+                    person.OnGetWalkSpeed += (ref float s) => {
+                        if (person.WornClothes.TryGetValue(ClothesLayer.Shirt, out var shirt) && shirt.Type == darkShirt)
+                            s *= 2;
+                    };
+                }
+            };
         }
 
         public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker) {
@@ -42,7 +55,7 @@ namespace ExampleMod {
 
             // loads a texture atlas with the given amount of separate texture regions in the x and y axes
             // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
-            texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 6));
+            texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 8));
             texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
         }
 
