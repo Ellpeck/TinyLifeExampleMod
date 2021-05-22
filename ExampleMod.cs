@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ExtremelySimpleLogger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,7 +33,9 @@ namespace ExampleMod {
             // adding a custom furniture item
             FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
                 ConstructedType = typeof(CustomTable),
-                Icon = this.Icon
+                Icon = this.Icon,
+                // allow chairs and plates to be slotted into and onto the table
+                ObjectSpots = ObjectSpot.TableSpots(new Point(1,1)).ToArray()
             });
 
             // adding custom clothing
