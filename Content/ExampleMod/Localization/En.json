@@ -4,5 +4,11 @@
     },
     "Clothes": {
         "ExampleMod.DarkShirt": "Dark Shirt"
+    },
+    "Emotions": {
+        "ExampleMod.GrassSitting": "Comfy Green Ground"
+    },
+    "Actions": {
+        "ExampleMod.SitOnGrass": "Sit in Grass"
     }
 }

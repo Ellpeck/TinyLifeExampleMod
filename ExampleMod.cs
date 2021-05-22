@@ -6,6 +6,8 @@ using MLEM.Data;
 using MLEM.Data.Content;
 using MLEM.Textures;
 using TinyLife;
+using TinyLife.Actions;
+using TinyLife.Emotions;
 using TinyLife.Mods;
 using TinyLife.Objects;
 using TinyLife.Utilities;
@@ -15,6 +17,8 @@ namespace ExampleMod {
 
         // the logger that we can use to log info about this mod
         public static Logger Logger { get; private set; }
+
+        public static EmotionModifier GrassSittingModifier;
 
         // visual data about this mod
         public override string Name => "Example Mod";
@@ -47,6 +51,23 @@ namespace ExampleMod {
                     };
                 }
             };
+
+            // adding a simple action: sitting down in the grass, which also gives us a nice emotion modifier
+            ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground,
+                (t, i) => new SitDownOnGrassAction(t, i)) {
+                // we set this action to be executable only on grass tiles, not on other ground
+                CanExecute = (info, automatic) => {
+                    var tile = info.Map.GetTile(info.ActionLocation.ToPoint());
+                    if (tile.Name.StartsWith("Grass"))
+                        return ActionType.CanExecuteResult.Valid;
+                    // hidden means the action won't be displayed in the ring menu
+                    return ActionType.CanExecuteResult.Hidden;
+                },
+                // since this action doesn't use objects (like chairs etc.), we set a texture to display instead 
+                Texture = this.uiTextures[1, 0]
+            });
+            GrassSittingModifier = EmotionModifier.Register(
+                new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
         }
 
         public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker) {
