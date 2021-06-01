@@ -8,7 +8,7 @@ Installing a mod is pretty simple:
 - If you received the mod you want to install as a `zip` (or any other kind of) archive, extract it first
 - Put the mod's `dll` as well as its `Content` folder into the `Mods` folder.
 
-Done! Now just start the game and the mod should automatically load. If there are any errors, they'll be logged in the `Log.txt` file in the `Tiny Life` folder.
+Done! Now just start the game and the mod should automatically load. If there are any errors, they'll be logged in the most recent file in the `Tiny Life/Logs` folder.
 
 # Creating mods
 To create a mod, all you have to do is create a repository [from this template](https://github.com/Ellpeck/TinyLifeExampleMod/generate) and open the project contained in it using Visual Studio, Rider or any other kind of C# IDE. The code that is already there contains some examples. Once you're done checking them out, you can just delete them and start fresh.
@@ -18,7 +18,7 @@ This repository also contains a little `Run` script for [windows](./Run.bat) and
 The game's API is **fully documented**. The documentation is easily accessible by opening any of the API's files in your IDE. The most updated version can be found on [the wiki](https://github.com/Ellpeck/TinyLifeExampleMod/wiki) as well.
 
 ## Distributing mods
-To distribute your mod to other people, all you have to do is go into the `bin/Debug/netcoreapp3.0` folder after building and copy your mod's `dll` and the `Content` directory. You can either send them to your friends directly or pack them into an archive first.
+To distribute your mod to other people, all you have to do is go into the `bin/Debug/net5.0` folder after building and copy your mod's `dll` and the `Content` directory. You can either send them to your friends directly or pack them into an archive first. If you want other players to try out your mod, you can also post it to [the community](https://itch.io/board/1032686/mods).
 
 ## Updating mods
 To change the version of Tiny Life that your mod is compiled against, simply go into [the project file](https://github.com/Ellpeck/TinyLifeExampleMod/blob/main/ExampleMod.csproj) and change the `TinyLifeApi` version. Note that some other dependencies might also have been updated, which needs to be [taken into account](https://github.com/Ellpeck/TinyLifeExampleMod#dependency-version-history).
