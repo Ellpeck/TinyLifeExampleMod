@@ -35,7 +35,7 @@ namespace ExampleMod {
                 ConstructedType = typeof(CustomTable),
                 Icon = this.Icon,
                 // allow chairs and plates to be slotted into and onto the table
-                ObjectSpots = ObjectSpot.TableSpots(new Point(1,1)).ToArray()
+                ObjectSpots = ObjectSpot.TableSpots(new Point(1, 1)).ToArray()
             });
 
             // adding custom clothing
@@ -56,8 +56,7 @@ namespace ExampleMod {
             };
 
             // adding a simple action: sitting down in the grass, which also gives us a nice emotion modifier
-            ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground,
-                (t, i) => new SitDownOnGrassAction(t, i)) {
+            ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(SitDownOnGrassAction)) {
                 // we set this action to be executable only on grass tiles, not on other ground
                 CanExecute = (info, automatic) => {
                     var tile = info.Map.GetTile(info.ActionLocation.ToPoint());
