@@ -51,7 +51,7 @@ namespace ExampleMod {
                 if (o is Person person) {
                     // changing the walk speed to be doubled if a person is wearing our dark shirt
                     person.OnGetWalkSpeed += (ref float s) => {
-                        if (person.WornClothes.TryGetValue(ClothesLayer.Shirt, out var shirt) && shirt.Type == darkShirt)
+                        if (person.CurrentOutfit.TryGetValue(ClothesLayer.Shirt, out var shirt) && shirt.Type == darkShirt)
                             s *= 2;
                     };
                 }
