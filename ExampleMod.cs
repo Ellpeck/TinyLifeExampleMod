@@ -41,7 +41,9 @@ namespace ExampleMod {
             // adding custom clothing
             var darkShirt = new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
                 this.customClothes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                100, this.Icon, false, ColorScheme.WarmDark);
+                100, // the price
+                ClothesIntention.Everyday | ClothesIntention.Workout, // the clothes item's use cases
+                this.Icon, false, ColorScheme.WarmDark);
             Clothes.Register(darkShirt);
 
             // adding an event subscription to people
