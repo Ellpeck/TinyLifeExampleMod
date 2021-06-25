@@ -19,6 +19,8 @@ This repository also contains a little `Run` script for [windows](./Run.bat) and
 
 The game's API is **fully documented**. The documentation is easily accessible by opening any of the API's files in your IDE. The most updated version can be found on [the wiki](https://github.com/Ellpeck/TinyLifeExampleMod/wiki) as well.
 
+If you have any questions, don't hesitate to [ask on the Discord](https://ellpeck.de/discord) or [start a discussion](https://github.com/Ellpeck/TinyLifeExampleMod/discussions) about it.
+
 ## Distributing mods
 To distribute your mod to other people, all you have to do is go into the `bin/Debug/net5.0` folder after building and copy your mod's `dll` and the `Content` directory. You can either send them to your friends directly or pack them into an archive first. If you want other players to try out your mod, you can also post it to [the community](https://itch.io/board/1032686/mods).
 
