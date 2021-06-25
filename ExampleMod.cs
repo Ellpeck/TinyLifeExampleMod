@@ -26,7 +26,9 @@ namespace ExampleMod {
         public override string Description => "This is the example mod for Tiny Life!";
         public override TextureRegion Icon => this.uiTextures[0, 0];
 
-        private UniformTextureAtlas customClothes;
+        private UniformTextureAtlas customTops;
+        private UniformTextureAtlas customHairs;
+        private UniformTextureAtlas customBottoms;
         private UniformTextureAtlas uiTextures;
 
         public override void AddGameContent(GameImpl game) {
@@ -40,11 +42,15 @@ namespace ExampleMod {
 
             // adding custom clothing
             var darkShirt = new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
-                this.customClothes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
+                this.customTops[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
                 100, // the price
                 ClothesIntention.Everyday | ClothesIntention.Workout, // the clothes item's use cases
                 this.Icon, false, ColorScheme.WarmDark);
             Clothes.Register(darkShirt);
+            // adding some more custom clothing
+            Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms[4, 0], 100, ClothesIntention.Everyday, this.Icon, false, ColorScheme.Pastel));
+            Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms[0, 0], 100, ClothesIntention.Everyday, this.Icon, false, ColorScheme.Pastel));
+            Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs[0, 0], 0, ClothesIntention.None, this.Icon, false, ColorScheme.Modern));
 
             // adding an event subscription to people
             MapObject.OnEventsAttachable += o => {
@@ -79,7 +85,9 @@ namespace ExampleMod {
 
             // loads a texture atlas with the given amount of separate texture regions in the x and y axes
             // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
-            texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 8));
+            texturePacker.Add(content.Load<Texture2D>("CustomTops"), r => this.customTops = new UniformTextureAtlas(r, 4, 8));
+            texturePacker.Add(content.Load<Texture2D>("CustomHairs"), r => this.customHairs = new UniformTextureAtlas(r, 4, 6));
+            texturePacker.Add(content.Load<Texture2D>("CustomBottomsShoes"), r => this.customBottoms = new UniformTextureAtlas(r, 8, 6));
             texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
         }
 

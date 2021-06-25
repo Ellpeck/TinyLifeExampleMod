@@ -3,7 +3,10 @@
         "ExampleMod.CustomTable": "Custom Table"
     },
     "Clothes": {
-        "ExampleMod.DarkShirt": "Dark Shirt"
+        "ExampleMod.DarkShirt": "Dark Shirt",
+        "ExampleMod.PastelPants": "Pastel Pants",
+        "ExampleMod.PastelShoes": "Pastel Shoes",
+        "ExampleMod.WeirdHair": "Weird Hair"
     },
     "Emotions": {
         "ExampleMod.GrassSitting": "Comfy Green Ground"
