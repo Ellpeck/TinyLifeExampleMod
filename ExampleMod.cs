@@ -19,7 +19,7 @@ namespace ExampleMod {
         // the logger that we can use to log info about this mod
         public static Logger Logger { get; private set; }
 
-        public static EmotionModifier GrassSittingModifier;
+        public static EmotionModifier GrassSittingModifier { get; private set; }
 
         // visual data about this mod
         public override string Name => "Example Mod";
