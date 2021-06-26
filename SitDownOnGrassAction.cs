@@ -9,6 +9,7 @@ using Action = TinyLife.Actions.Action;
 
 namespace ExampleMod {
     // we use a multi action because we want to walk to the location, and then execute the main sitting part
+    // see CustomTable for information on how to store custom action-specific information to disk as well
     public class SitDownOnGrassAction : MultiAction {
 
         public SitDownOnGrassAction(ActionType type, ActionInfo info) : base(type, info) {
