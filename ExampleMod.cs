@@ -73,6 +73,13 @@ namespace ExampleMod {
                     // hidden means the action won't be displayed in the ring menu
                     return ActionType.CanExecuteResult.Hidden;
                 },
+                Ai = {
+                    // we allow the action to be done even if the solved needs aren't low enough on a person
+                    CanDoRandomly = true,
+                    SolvedNeeds = new[] {NeedType.Energy},
+                    // make people more likely to sit down in the grass if they're uncomfortable 
+                    PassivePriority = p => p.Emotion == EmotionType.Uncomfortable ? 150 : 25
+                },
                 // since this action doesn't use objects (like chairs etc.), we set a texture to display instead 
                 Texture = this.uiTextures[1, 0]
             });
