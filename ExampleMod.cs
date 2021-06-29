@@ -67,6 +67,8 @@ namespace ExampleMod {
             ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(SitDownOnGrassAction)) {
                 // we set this action to be executable only on grass tiles, not on other ground
                 CanExecute = (info, automatic) => {
+                    if (!info.Map.IsInBounds(info.ActionLocation.ToPoint()))
+                        return ActionType.CanExecuteResult.Hidden;
                     var tile = info.Map.GetTile(info.ActionLocation.ToPoint());
                     if (tile.Name.StartsWith("Grass"))
                         return ActionType.CanExecuteResult.Valid;
