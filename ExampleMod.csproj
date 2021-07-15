@@ -5,9 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLifeApi" Version="0.13.1" />
+        <PackageReference Include="TinyLifeApi" Version="0.14.0" />
 
-        <PackageReference Include="ExtremelySimpleLogger" Version="1.2.1" />
+        <PackageReference Include="ExtremelySimpleLogger" Version="1.2.3" />
         <PackageReference Include="MLEM.Data" Version="5.0.0" />
         <PackageReference Include="MLEM.Extended" Version="5.0.0" />
         <PackageReference Include="MLEM.Startup" Version="5.0.0" />
