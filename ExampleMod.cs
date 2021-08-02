@@ -34,7 +34,10 @@ namespace ExampleMod {
         public override void AddGameContent(GameImpl game) {
             // adding a custom furniture item
             FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
+                // specify the type that should be constructed when this furniture type is placed
+                // if this is not specified, the Furniture class is used, which is used for furniture without special animations or data
                 ConstructedType = typeof(CustomTable),
+                // specifying icons for custom clothes and furniture is optional, but using the mod's icon helps users recognize a mod's features
                 Icon = this.Icon,
                 // allow chairs and plates to be slotted into and onto the table
                 ObjectSpots = ObjectSpot.TableSpots(new Point(1, 1)).ToArray()

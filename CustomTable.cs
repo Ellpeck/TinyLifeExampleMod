@@ -6,6 +6,8 @@ using TinyLife.Objects;
 using TinyLife.World;
 
 namespace ExampleMod {
+    // note that having a custom class for a furniture item like this is entirely optional
+    // but it allows for additional functionalities as displayed in this example 
     public class CustomTable : Furniture {
 
         private static readonly Random Random = new();
