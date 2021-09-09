@@ -10,8 +10,6 @@ namespace ExampleMod {
     // but it allows for additional functionalities as displayed in this example 
     public class CustomTable : Furniture {
 
-        private static readonly Random Random = new();
-
         // anything whose base classes have the DataContract attribute automatically gets saved and loaded to and from disk
         // this means that you can add custom DataMember members to have them saved and loaded
         [DataMember]
