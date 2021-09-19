@@ -12,6 +12,6 @@
         "ExampleMod.GrassSitting": "Comfy Green Ground"
     },
     "Actions": {
-        "ExampleMod.SitOnGrass": "Sit in Grass"
+        "ExampleMod.SitOnGrass": "Sit on Grass"
     }
 }
