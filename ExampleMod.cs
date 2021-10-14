@@ -48,12 +48,12 @@ namespace ExampleMod {
                 this.customTops[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
                 100, // the price
                 ClothesIntention.Everyday | ClothesIntention.Workout, // the clothes item's use cases
-                this.Icon, false, ColorScheme.WarmDark);
+                ColorScheme.WarmDark) {Icon = this.Icon};
             Clothes.Register(darkShirt);
             // adding some more custom clothing
-            Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms[4, 0], 100, ClothesIntention.Everyday, this.Icon, false, ColorScheme.Pastel));
-            Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms[0, 0], 100, ClothesIntention.Everyday, this.Icon, false, ColorScheme.Pastel));
-            Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs[0, 0], 0, ClothesIntention.None, this.Icon, false, ColorScheme.Modern));
+            Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms[4, 0], 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
+            Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms[0, 0], 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
+            Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs[0, 0], 0, ClothesIntention.None, ColorScheme.Modern) {Icon = this.Icon});
 
             // adding an event subscription to people
             MapObject.OnEventsAttachable += o => {

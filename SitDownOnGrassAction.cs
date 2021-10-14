@@ -30,7 +30,7 @@ namespace ExampleMod {
             // this method gets called every update frame while the action is active
 
             // set our person to look like they're sitting on the ground
-            this.Person.CurrentPose = Person.Pose.SittingLegsClose;
+            this.Person.CurrentPose = Person.Pose.SittingGround;
 
             // restore need and lower emotions
             this.Person.RestoreNeed(NeedType.Energy, 0.5F, speed);
