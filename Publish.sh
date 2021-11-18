@@ -7,5 +7,5 @@ dotnet build
 cd ./bin/Debug/net5.0
 file=$(find *.dll -printf %f)
 dest=${file::-4}.zip
-tar -cf ../$dest --exclude ref --exclude *.pdb --exclude *.deps.json *
+zip -r ../$dest * --exclude ref --exclude *.pdb --exclude *.deps.json
 echo Published to bin/Debug/$dest
