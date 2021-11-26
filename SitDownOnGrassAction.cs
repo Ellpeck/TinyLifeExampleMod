@@ -25,16 +25,16 @@ namespace ExampleMod {
             // but we don't need to do anything here for our action
         }
 
-        protected override void AndThenUpdate(GameTime time, TimeSpan passedInGame, GameSpeed speed) {
-            base.AndThenUpdate(time, passedInGame, speed);
+        protected override void AndThenUpdate(GameTime time, TimeSpan passedInGame, float speedMultiplier) {
+            base.AndThenUpdate(time, passedInGame, speedMultiplier);
             // this method gets called every update frame while the action is active
 
             // set our person to look like they're sitting on the ground
             this.Person.CurrentPose = Person.Pose.SittingGround;
 
             // restore need and lower emotions
-            this.Person.RestoreNeed(NeedType.Energy, 0.5F, speed);
-            this.Person.LowerEmotion(EmotionType.Uncomfortable, 0.0001F, speed);
+            this.Person.RestoreNeed(NeedType.Energy, 0.5F, speedMultiplier);
+            this.Person.LowerEmotion(EmotionType.Uncomfortable, 0.0001F, speedMultiplier);
         }
 
         protected override CompletionType AndThenIsCompleted() {
