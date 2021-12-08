@@ -4,7 +4,7 @@ cd /d "%~dp0"
 rem build the mod
 dotnet build
 rem copy the mod to the mods folder
-robocopy ./bin/Debug/net5.0/ "%LOCALAPPDATA%/Tiny Life/Mods" /e /is
+robocopy ./bin/Debug/net6.0/ "%LOCALAPPDATA%/Tiny Life/Mods" /e /is
 rem run the game
 set /p dir=<"%LOCALAPPDATA%/Tiny Life/GameDir"
 cd /d %dir%

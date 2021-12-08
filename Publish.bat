@@ -4,7 +4,7 @@ cd /d "%~dp0"
 rem build the mod
 dotnet build
 rem zip the mod
-cd ./bin/Debug/net5.0
+cd ./bin/Debug/net6.0
 for /F %%p in ('dir /b "*.dll"') do (set file=%%p)
 set dest=%file:~0,-4%.zip
 tar -acf ../%dest% --exclude ref --exclude *.pdb --exclude *.deps.json *
