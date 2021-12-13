@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.Serialization;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
 using TinyLife.Objects;
 using TinyLife.World;
 
