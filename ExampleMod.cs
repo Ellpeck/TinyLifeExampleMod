@@ -13,7 +13,7 @@ using TinyLife.Mods;
 using TinyLife.Objects;
 using TinyLife.Utilities;
 
-namespace ExampleMod; 
+namespace ExampleMod;
 
 public class ExampleMod : Mod {
 

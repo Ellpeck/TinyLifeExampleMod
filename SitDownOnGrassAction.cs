@@ -7,14 +7,13 @@ using TinyLife.Emotions;
 using TinyLife.Objects;
 using Action = TinyLife.Actions.Action;
 
-namespace ExampleMod; 
+namespace ExampleMod;
 
 // we use a multi action because we want to walk to the location, and then execute the main sitting part
 // see CustomTable for information on how to store custom action-specific information to disk as well
 public class SitDownOnGrassAction : MultiAction {
 
-    public SitDownOnGrassAction(ActionType type, ActionInfo info) : base(type, info) {
-    }
+    public SitDownOnGrassAction(ActionType type, ActionInfo info) : base(type, info) {}
 
     protected override IEnumerable<Action> CreateFirstActions() {
         // we want to walk to the location clicked, so we use the current action info
