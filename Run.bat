@@ -8,4 +8,4 @@ robocopy ./bin/Debug/net6.0/ "%LOCALAPPDATA%/Tiny Life/Mods" /e /is
 rem run the game
 set /p dir=<"%LOCALAPPDATA%/Tiny Life/GameDir"
 cd /d %dir%
-"Tiny Life.exe" -v
+"Tiny Life.exe" -v --skip-splash

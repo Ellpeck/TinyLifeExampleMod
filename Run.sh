@@ -8,4 +8,4 @@ cp ./bin/Debug/net6.0/* "$HOME/.local/share/Tiny Life/Mods" -r
 # run the game
 dir=$(<"$HOME/.local/share/Tiny Life/GameDir")
 cd $dir
-"./Tiny Life" -v
+"./Tiny Life" -v --skip-splash
