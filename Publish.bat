@@ -2,7 +2,7 @@
 rem move to the script directory
 cd /d "%~dp0"
 rem build the mod
-dotnet build
+dotnet build || exit /b
 rem zip the mod
 cd ./bin/Debug/net6.0
 for /F %%p in ('dir /b "*.dll"') do (set file=%%p)

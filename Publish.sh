@@ -2,7 +2,7 @@
 # move to the script directory
 cd "$(dirname "$0")"
 # build the mod
-dotnet build
+dotnet build || exit
 # zip the mod
 cd ./bin/Debug/net6.0
 file=$(find *.dll -print)

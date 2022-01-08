@@ -2,7 +2,7 @@
 # move to the script directory
 cd "$(dirname "$0")"
 # build the mod
-dotnet build
+dotnet build || exit
 # copy the mod to the mods folder
 cp -r ./bin/Debug/net6.0/* "$HOME/.local/share/Tiny Life/Mods"
 # run the game
