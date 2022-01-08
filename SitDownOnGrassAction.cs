@@ -47,7 +47,7 @@ public class SitDownOnGrassAction : MultiAction {
         // this method is called when the action completes in any way, even if it fails
         if (type == CompletionType.Completed) {
             // once we're finished sitting, we want to get a nice emotion modifier for it
-            this.Person.AddEmotion(ExampleMod.GrassSittingModifier, 2, TimeSpan.FromHours(1));
+            this.Person.AddEmotion(ExampleMod.GrassSittingModifier, 2, TimeSpan.FromHours(1), this.Type);
         }
     }
 
