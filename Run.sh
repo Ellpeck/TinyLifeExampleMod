@@ -4,8 +4,8 @@ cd "$(dirname "$0")"
 # build the mod
 dotnet build
 # copy the mod to the mods folder
-cp ./bin/Debug/net6.0/* "$HOME/.local/share/Tiny Life/Mods" -r
+cp -r ./bin/Debug/net6.0/* "$HOME/.local/share/Tiny Life/Mods"
 # run the game
 dir=$(<"$HOME/.local/share/Tiny Life/GameDir")
-cd $dir
+cd "$dir"
 "./Tiny Life" -v --skip-splash
