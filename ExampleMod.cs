@@ -32,7 +32,7 @@ public class ExampleMod : Mod {
     private UniformTextureAtlas customBottoms;
     private UniformTextureAtlas uiTextures;
 
-    public override void AddGameContent(GameImpl game) {
+    public override void AddGameContent(GameImpl game, ModInfo info) {
         // adding a custom furniture item
         FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
             // specify the type that should be constructed when this furniture type is placed
@@ -93,7 +93,7 @@ public class ExampleMod : Mod {
             new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
     }
 
-    public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker) {
+    public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
         Logger = logger;
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
@@ -104,7 +104,7 @@ public class ExampleMod : Mod {
         texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
     }
 
-    public override IEnumerable<string> GetCustomFurnitureTextures() {
+    public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info) {
         // tell the game about our custom furniture texture
         // this needs to be a path to a data texture atlas, relative to our "Content" directory
         // the texture atlas combines the png texture and the .atlas information
