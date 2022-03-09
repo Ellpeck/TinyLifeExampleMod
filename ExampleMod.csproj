@@ -7,7 +7,8 @@
     <ItemGroup>
         <PackageReference Include="TinyLifeApi" Version="0.20.0" />
         
-        <PackageReference Include="ExtremelySimpleLogger" Version="1.2.4" />
+        <PackageReference Include="ExtremelySimpleLogger" Version="1.2.5" />
+        <PackageReference Include="Lib.Harmony" Version="2.2.0" />
         <PackageReference Include="MLEM.Data" Version="5.2.0" />
         <PackageReference Include="MLEM.Extended" Version="5.2.0" />
         <PackageReference Include="MLEM.Startup" Version="5.2.0" />
