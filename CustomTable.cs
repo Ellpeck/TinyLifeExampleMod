@@ -21,12 +21,12 @@ public class CustomTable : Furniture {
 
     public override void OnAdded() {
         base.OnAdded();
-        ExampleMod.Logger.Info("We were added at " + this.Position);
+        ExampleMod.Logger.Info("The custom table was added at " + this.Position);
     }
 
     public override void OnRemoved() {
         base.OnRemoved();
-        ExampleMod.Logger.Info("We were removed from " + this.Position);
+        ExampleMod.Logger.Info("The custom table was removed from " + this.Position);
     }
 
     // validate is called when this object is loaded from disk

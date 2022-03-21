@@ -36,7 +36,7 @@ public class ExampleMod : Mod {
         // adding a custom furniture item
         FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
             // specify the type that should be constructed when this furniture type is placed
-            // if this is not specified, the Furniture class is used, which is used for furniture without special animations or data
+            // if this is not specified, the  Furniture class is used, which is used for furniture without special animations or data
             ConstructedType = typeof(CustomTable),
             // specifying icons for custom clothes and furniture is optional, but using the mod's icon helps users recognize a mod's features
             Icon = this.Icon,
@@ -70,18 +70,17 @@ public class ExampleMod : Mod {
         // adding a simple action: sitting down in the grass, which also gives us a nice emotion modifier
         ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(SitDownOnGrassAction)) {
             // we set this action to be executable only on grass tiles, not on other ground
-            CanExecute = (info, automatic) => {
-                if (!info.Map.IsInBounds(info.ActionLocation.ToPoint()))
+            CanExecute = (actionInfo, automatic) => {
+                if (!actionInfo.Map.IsInBounds(actionInfo.ActionLocation.ToPoint()))
                     return ActionType.CanExecuteResult.Hidden;
-                var tile = info.Map.GetTile(info.ActionLocation.ToPoint());
-                if (tile.Name.StartsWith("Grass"))
-                    return ActionType.CanExecuteResult.Valid;
-                // hidden means the action won't be displayed in the ring menu
-                return ActionType.CanExecuteResult.Hidden;
+                var tile = actionInfo.Map.GetTile(actionInfo.ActionLocation.ToPoint());
+                // hidden means the action won't be displayed in the ring menu, Valid means the player (or AI) is able to enqueue and execute it
+                return tile.Name.StartsWith("Grass") ? ActionType.CanExecuteResult.Valid : ActionType.CanExecuteResult.Hidden;
             },
             Ai = {
                 // we allow the action to be done even if the solved needs aren't low enough on a person
                 CanDoRandomly = true,
+                // the solved needs indicate when the AI should mark this action as important, they don't actually have to match the action's behavior
                 SolvedNeeds = new[] {NeedType.Energy},
                 // make people more likely to sit down in the grass if they're uncomfortable 
                 PassivePriority = p => p.Emotion == EmotionType.Uncomfortable ? 150 : 25
@@ -89,6 +88,8 @@ public class ExampleMod : Mod {
             // since this action doesn't use objects (like chairs etc.), we set a texture to display instead 
             Texture = this.uiTextures[1, 0]
         });
+        
+        // we use this emotion modifier in SitDownOnGrassAction
         GrassSittingModifier = EmotionModifier.Register(
             new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
     }
