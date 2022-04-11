@@ -88,7 +88,7 @@ public class ExampleMod : Mod {
             // since this action doesn't use objects (like chairs etc.), we set a texture to display instead 
             Texture = this.uiTextures[1, 0]
         });
-        
+
         // we use this emotion modifier in SitDownOnGrassAction
         GrassSittingModifier = EmotionModifier.Register(
             new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
