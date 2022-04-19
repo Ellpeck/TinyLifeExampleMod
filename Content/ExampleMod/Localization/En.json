@@ -1,6 +1,7 @@
 {
     "BuildMode": {
-        "ExampleMod.CustomTable": "Custom Table"
+        "ExampleMod.CustomTable": "Custom Table",
+        "ExampleMod.CrossedWallpaper": "Crossed Wallpaper"
     },
     "Clothes": {
         "ExampleMod.DarkShirt": "Dark Shirt",

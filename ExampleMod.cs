@@ -12,6 +12,7 @@ using TinyLife.Emotions;
 using TinyLife.Mods;
 using TinyLife.Objects;
 using TinyLife.Utilities;
+using TinyLife.World;
 
 namespace ExampleMod;
 
@@ -31,6 +32,7 @@ public class ExampleMod : Mod {
     private UniformTextureAtlas customHairs;
     private UniformTextureAtlas customBottoms;
     private UniformTextureAtlas uiTextures;
+    private UniformTextureAtlas wallpaperTextures;
 
     public override void AddGameContent(GameImpl game, ModInfo info) {
         // adding a custom furniture item
@@ -92,6 +94,9 @@ public class ExampleMod : Mod {
         // we use this emotion modifier in SitDownOnGrassAction
         GrassSittingModifier = EmotionModifier.Register(
             new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
+
+        // adding a custom wallpaper (we're using the top left texture region, which is why we pass 0, 0 as the texture coordinate)
+        Wallpaper.Register("ExampleMod.CrossedWallpaper", 15, this.wallpaperTextures, new Point(0, 0), ColorScheme.Modern, this.Icon);
     }
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
@@ -103,6 +108,8 @@ public class ExampleMod : Mod {
         texturePacker.Add(content.Load<Texture2D>("CustomHairs"), r => this.customHairs = new UniformTextureAtlas(r, 4, 6));
         texturePacker.Add(content.Load<Texture2D>("CustomBottomsShoes"), r => this.customBottoms = new UniformTextureAtlas(r, 8, 6));
         texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
+        // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
+        TextureHandler.ApplyWallpaperMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, r => this.wallpaperTextures = r);
     }
 
     public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info) {
