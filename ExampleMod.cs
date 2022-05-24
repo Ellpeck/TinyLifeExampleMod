@@ -74,10 +74,10 @@ public class ExampleMod : Mod {
             // we set this action to be executable only on grass tiles, not on other ground
             CanExecute = (actionInfo, automatic) => {
                 if (!actionInfo.Map.IsInBounds(actionInfo.ActionLocation.ToPoint()))
-                    return ActionType.CanExecuteResult.Hidden;
+                    return CanExecuteResult.Hidden;
                 var tile = actionInfo.Map.GetTile(actionInfo.ActionLocation.ToPoint());
                 // hidden means the action won't be displayed in the ring menu, Valid means the player (or AI) is able to enqueue and execute it
-                return tile.Name.StartsWith("Grass") ? ActionType.CanExecuteResult.Valid : ActionType.CanExecuteResult.Hidden;
+                return tile.Name.StartsWith("Grass") ? CanExecuteResult.Valid : CanExecuteResult.Hidden;
             },
             Ai = {
                 // we allow the action to be done even if the solved needs aren't low enough on a person
@@ -109,7 +109,7 @@ public class ExampleMod : Mod {
         texturePacker.Add(content.Load<Texture2D>("CustomBottomsShoes"), r => this.customBottoms = new UniformTextureAtlas(r, 8, 6));
         texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
         // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
-        TextureHandler.ApplyWallpaperMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, r => this.wallpaperTextures = r);
+        WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, texturePacker, r => this.wallpaperTextures = r);
     }
 
     public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info) {
