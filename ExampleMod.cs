@@ -32,7 +32,7 @@ public class ExampleMod : Mod {
     private UniformTextureAtlas customHairs;
     private UniformTextureAtlas customBottoms;
     private UniformTextureAtlas uiTextures;
-    private UniformTextureAtlas wallpaperTextures;
+    private Dictionary<Point, TextureRegion> wallpaperTextures;
 
     public override void AddGameContent(GameImpl game, ModInfo info) {
         // adding a custom furniture item
