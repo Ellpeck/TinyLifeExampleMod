@@ -35,7 +35,7 @@ public class SitDownOnGrassAction : MultiAction {
         this.Person.CurrentPose = Person.Pose.SittingGround;
 
         // restore need and lower emotions
-        this.Person.RestoreNeed(NeedType.Energy, 0.5F, speedMultiplier);
+        this.Person.RestoreNeed(NeedType.Energy, 0.5F, this.Info, speedMultiplier);
         this.Person.LowerEmotion(EmotionType.Uncomfortable, 0.0001F, speedMultiplier);
     }
 
