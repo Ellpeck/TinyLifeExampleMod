@@ -92,7 +92,7 @@ public class ExampleMod : Mod {
         });
 
         // we use this emotion modifier in SitDownOnGrassAction
-        GrassSittingModifier = EmotionModifier.Register(
+        ExampleMod.GrassSittingModifier = EmotionModifier.Register(
             new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
 
         // adding a custom wallpaper (we're using the top left texture region, which is why we pass 0, 0 as the texture coordinate)
@@ -100,7 +100,7 @@ public class ExampleMod : Mod {
     }
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
-        Logger = logger;
+        ExampleMod.Logger = logger;
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed

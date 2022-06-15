@@ -16,7 +16,7 @@ public class CustomTable : Furniture {
     public float TestValue;
 
     public CustomTable(Guid id, FurnitureType type, int[] colors, Map map, Vector2 pos) : base(id, type, colors, map, pos) {
-        this.TestValue = Random.NextSingle();
+        this.TestValue = Furniture.Random.NextSingle();
     }
 
     public override void OnAdded() {
