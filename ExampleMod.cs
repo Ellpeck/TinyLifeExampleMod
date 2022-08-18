@@ -72,7 +72,7 @@ public class ExampleMod : Mod {
         // adding a simple action: sitting down in the grass, which also gives us a nice emotion modifier
         ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(SitDownOnGrassAction)) {
             // we set this action to be executable only on grass tiles, not on other ground
-            CanExecute = (actionInfo, automatic) => {
+            CanExecute = (actionInfo, _) => {
                 if (!actionInfo.Map.IsInBounds(actionInfo.ActionLocation.ToPoint()))
                     return CanExecuteResult.Hidden;
                 var tile = actionInfo.Map.GetTile(actionInfo.ActionLocation.ToPoint());
