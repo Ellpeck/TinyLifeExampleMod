@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using TinyLife;
 using TinyLife.Actions;
 using TinyLife.Emotions;

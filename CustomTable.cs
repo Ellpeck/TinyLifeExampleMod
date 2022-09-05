@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Serialization;
-using Microsoft.Xna.Framework;
 using TinyLife.Objects;
 using TinyLife.World;
 
