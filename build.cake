@@ -7,9 +7,8 @@ var config = Argument("configuration", "Release");
 
 var tinyLifeDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Tiny Life";
 
-Task("Build").Does(() => {
-    foreach (var project in GetFiles("**/*.csproj"))
-        DotNetBuild(project.FullPath, new DotNetBuildSettings { Configuration = config });
+Task("Build").DoesForEach(GetFiles("**/*.csproj"), p => {
+    DotNetBuild(p.FullPath, new DotNetBuildSettings { Configuration = config });
 });
 
 Task("CopyToMods").IsDependentOn("Build").Does(() => {
@@ -56,18 +55,14 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     Information($"Tiny Life exited with exit code {process.ExitCode}");
 });
 
-Task("Publish").IsDependentOn("Build").Does(() => {
-    foreach (var dir in GetDirectories($"bin/{config}/net*")) {
-        var dllFile = GetFiles($"{dir}/**/*.dll").FirstOrDefault();
-        if (dllFile == null) {
-            Warning($"Couldn't find built mod in {dir}");
-            continue;
-        }
-        var dllName = System.IO.Path.GetFileNameWithoutExtension(dllFile.ToString());
-        var zipLoc = $"{dir.GetParent()}/{dllName}.zip";
-        Zip(dir, zipLoc, GetFiles($"{dir}/**/*"));
-        Information($"Published {dllName} to {zipLoc}");
-    }
+Task("Publish").IsDependentOn("Build").DoesForEach(GetDirectories($"bin/{config}/net*"), d => {
+    var dllFile = GetFiles($"{d}/**/*.dll").FirstOrDefault();
+    if (dllFile == null)
+        throw new Exception($"Couldn't find built mod in {d}");
+    var dllName = System.IO.Path.GetFileNameWithoutExtension(dllFile.ToString());
+    var zipLoc = $"{d.GetParent()}/{dllName}.zip";
+    Zip(d, zipLoc, GetFiles($"{d}/**/*"));
+    Information($"Published {dllName} to {zipLoc}");
 });
 
 RunTarget(target);
