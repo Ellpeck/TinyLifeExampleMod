@@ -55,7 +55,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     Information($"Tiny Life exited with exit code {process.ExitCode}");
 });
 
-Task("Publish").IsDependentOn("Build").DoesForEach(GetDirectories($"bin/{config}/net*"), d => {
+Task("Publish").IsDependentOn("Build").DoesForEach(() => GetDirectories($"bin/{config}/net*"), d => {
     var dllFile = GetFiles($"{d}/**/*.dll").FirstOrDefault();
     if (dllFile == null)
         throw new Exception($"Couldn't find built mod in {d}");
