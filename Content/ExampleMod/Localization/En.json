@@ -14,5 +14,8 @@
     },
     "Actions": {
         "ExampleMod.SitOnGrass": "Sit on Grass"
+    },
+    "Ui": {
+        "ExampleMod.DarkShirtSpeedOption": "Dark Shirt Speed"
     }
 }

@@ -4,6 +4,8 @@ using ExtremelySimpleLogger;
 using MLEM.Data;
 using MLEM.Data.Content;
 using MLEM.Textures;
+using MLEM.Ui;
+using MLEM.Ui.Elements;
 using TinyLife;
 using TinyLife.Actions;
 using TinyLife.Emotions;
@@ -18,6 +20,7 @@ public class ExampleMod : Mod {
 
     // the logger that we can use to log info about this mod
     public static Logger Logger { get; private set; }
+    public static ModOptions Options { get; private set; }
 
     public static EmotionModifier GrassSittingModifier { get; private set; }
 
@@ -62,7 +65,7 @@ public class ExampleMod : Mod {
                 // changing the walk speed to be doubled if a person is wearing our dark shirt
                 person.OnGetWalkSpeed += (ref float s) => {
                     if (person.CurrentOutfit.Clothes.TryGetValue(ClothesLayer.Shirt, out var shirt) && shirt.Type == darkShirt)
-                        s *= 2;
+                        s *= ExampleMod.Options.DarkShirtSpeedIncrease;
                 };
             }
         };
@@ -82,10 +85,10 @@ public class ExampleMod : Mod {
                 CanDoRandomly = true,
                 // the solved needs indicate when the AI should mark this action as important, they don't actually have to match the action's behavior
                 SolvedNeeds = new[] {NeedType.Energy},
-                // make people more likely to sit down in the grass if they're uncomfortable 
+                // make people more likely to sit down in the grass if they're uncomfortable
                 PassivePriority = p => p.Emotion == EmotionType.Uncomfortable ? 150 : 25
             },
-            // since this action doesn't use objects (like chairs etc.), we set a texture to display instead 
+            // since this action doesn't use objects (like chairs etc.), we set a texture to display instead
             Texture = this.uiTextures[1, 0]
         });
 
@@ -99,6 +102,7 @@ public class ExampleMod : Mod {
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
         ExampleMod.Logger = logger;
+        ExampleMod.Options = ModOptions.Load(info);
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
@@ -116,6 +120,20 @@ public class ExampleMod : Mod {
         // the texture atlas combines the png texture and the .atlas information
         // see https://mlem.ellpeck.de/api/MLEM.Data.DataTextureAtlas.html for more info
         yield return "CustomFurniture";
+    }
+
+    // this method can be overridden to populate the section in the mod tab of the game's options menu where this mod's options should be displayed
+    // this mod uses the ModOptions class to manage its options, though that is optional
+    // in general, options should be stored in the ModInfo.OptionsFile file that is given to the mod by the game
+    public override void PopulateOptions(Group group, ModInfo info) {
+        group.AddChild(new Paragraph(Anchor.AutoLeft, 1, _ => $"{Localization.Get(LnCategory.Ui, "ExampleMod.DarkShirtSpeedOption")}: {ExampleMod.Options.DarkShirtSpeedIncrease}"));
+        group.AddChild(new Slider(Anchor.AutoLeft, new Vector2(1, 12), 5, 5) {
+            CurrentValue = ExampleMod.Options.DarkShirtSpeedIncrease,
+            OnValueChanged = (_, v) => {
+                ExampleMod.Options.DarkShirtSpeedIncrease = v;
+                ExampleMod.Options.Save(info);
+            }
+        });
     }
 
 }
