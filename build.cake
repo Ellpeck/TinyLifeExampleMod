@@ -8,6 +8,7 @@ var config = Argument("configuration", "Release");
 var tinyLifeDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Tiny Life";
 
 Task("Build").DoesForEach(GetFiles("**/*.csproj"), p => {
+    DeleteFiles($"bin/{config}/**/*");
     DotNetBuild(p.FullPath, new DotNetBuildSettings { Configuration = config });
 });
 
@@ -25,6 +26,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
         throw new Exception("Didn't find game directory information. Run the game manually at least once to allow the Run task to be executed.");
     var exe = $"{System.IO.File.ReadAllText(exeDir)}/Tiny Life";
     var process = Process.Start(new ProcessStartInfo(exe) {
+        Arguments = "-v --skip-splash --skip-preloads",
         CreateNoWindow = true
     });
 

@@ -102,7 +102,7 @@ public class ExampleMod : Mod {
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
         ExampleMod.Logger = logger;
-        ExampleMod.Options = ModOptions.Load(info);
+        ExampleMod.Options = info.LoadOptions(() => new ModOptions());
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
@@ -131,7 +131,7 @@ public class ExampleMod : Mod {
             CurrentValue = ExampleMod.Options.DarkShirtSpeedIncrease,
             OnValueChanged = (_, v) => {
                 ExampleMod.Options.DarkShirtSpeedIncrease = v;
-                ExampleMod.Options.Save(info);
+                info.SaveOptions(ExampleMod.Options);
             }
         });
     }
