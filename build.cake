@@ -31,7 +31,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     });
 
     // we wait a bit to make sure the process has generated a new log file, bleh
-    Thread.Sleep(1000);
+    Thread.Sleep(3000);
 
     // attach to the newest log file
     var logsDir = $"{tinyLifeDir}/Logs";
