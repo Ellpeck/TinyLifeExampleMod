@@ -20,7 +20,7 @@ public class ExampleMod : Mod {
 
     // the logger that we can use to log info about this mod
     public static Logger Logger { get; private set; }
-    public static ModOptions Options { get; private set; }
+    public static ExampleModOptions Options { get; private set; }
 
     public static EmotionModifier GrassSittingModifier { get; private set; }
 
@@ -40,7 +40,7 @@ public class ExampleMod : Mod {
         FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
             // specify the type that should be constructed when this furniture type is placed
             // if this is not specified, the  Furniture class is used, which is used for furniture without special animations or data
-            ConstructedType = typeof(CustomTable),
+            ConstructedType = typeof(ExampleModTable),
             // specifying icons for custom clothes and furniture is optional, but using the mod's icon helps users recognize a mod's features
             Icon = this.Icon,
             // allow chairs and plates to be slotted into and onto the table
@@ -71,7 +71,7 @@ public class ExampleMod : Mod {
         };
 
         // adding a simple action: sitting down in the grass, which also gives us a nice emotion modifier
-        ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(SitDownOnGrassAction)) {
+        ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(ExampleModGrassSitAction)) {
             // we set this action to be executable only on grass tiles, not on other ground
             CanExecute = (actionInfo, _) => {
                 if (!actionInfo.Map.IsInBounds(actionInfo.ActionLocation.ToPoint()))
@@ -102,7 +102,7 @@ public class ExampleMod : Mod {
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
         ExampleMod.Logger = logger;
-        ExampleMod.Options = info.LoadOptions(() => new ModOptions());
+        ExampleMod.Options = info.LoadOptions(() => new ExampleModOptions());
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
