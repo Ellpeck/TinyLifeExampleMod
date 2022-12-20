@@ -40,7 +40,7 @@ public class ExampleModGrassSitAction : MultiAction {
 
     protected override CompletionType AndThenIsCompleted() {
         // we want to complete our action once 10 minutes of sitting time have passed
-        return this.CompleteInTime(TimeSpan.FromMinutes(10));
+        return this.CompleteIfTimeUp(TimeSpan.FromMinutes(10));
     }
 
     protected override void AndThenOnCompleted(CompletionType type) {

@@ -27,12 +27,12 @@ public class ExampleMod : Mod {
     // visual data about this mod
     public override string Name => "Example Mod";
     public override string Description => "This is the example mod for Tiny Life!";
-    public override TextureRegion Icon => this.uiTextures[0, 0];
+    public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
 
-    private UniformTextureAtlas customTops;
-    private UniformTextureAtlas customHairs;
-    private UniformTextureAtlas customBottoms;
-    private UniformTextureAtlas uiTextures;
+    private Dictionary<Point, TextureRegion> customTops;
+    private Dictionary<Point, TextureRegion> customHairs;
+    private Dictionary<Point, TextureRegion> customBottoms;
+    private Dictionary<Point, TextureRegion> uiTextures;
     private Dictionary<Point, TextureRegion> wallpaperTextures;
 
     public override void AddGameContent(GameImpl game, ModInfo info) {
@@ -49,15 +49,15 @@ public class ExampleMod : Mod {
 
         // adding custom clothing
         var darkShirt = new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
-            this.customTops[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
+            this.customTops, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
             100, // the price
             ClothesIntention.Everyday | ClothesIntention.Workout, // the clothes item's use cases
             ColorScheme.WarmDark) {Icon = this.Icon};
         Clothes.Register(darkShirt);
         // adding some more custom clothing
-        Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms[4, 0], 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
-        Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms[0, 0], 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
-        Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs[0, 0], 0, ClothesIntention.None, ColorScheme.Modern) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms, new Point(4, 0), 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms, new Point(0, 0), 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs, new Point(0, 0), 0, ClothesIntention.None, ColorScheme.Modern) {Icon = this.Icon});
 
         // adding an event subscription to people
         MapObject.OnEventsAttachable += o => {
@@ -89,12 +89,12 @@ public class ExampleMod : Mod {
                 PassivePriority = p => p.Emotion == EmotionType.Uncomfortable ? 150 : 25
             },
             // since this action doesn't use objects (like chairs etc.), we set a texture to display instead
-            Texture = this.uiTextures[1, 0]
+            Texture = this.uiTextures[new Point(1, 0)]
         });
 
         // we use this emotion modifier in SitDownOnGrassAction
         ExampleMod.GrassSittingModifier = EmotionModifier.Register(
-            new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[1, 0], EmotionType.Happy));
+            new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[new Point(1, 0)], EmotionType.Happy));
 
         // adding a custom wallpaper (we're using the top left texture region, which is why we pass 0, 0 as the texture coordinate)
         Wallpaper.Register("ExampleMod.CrossedWallpaper", 15, this.wallpaperTextures, new Point(0, 0), ColorScheme.Modern, this.Icon);
@@ -106,10 +106,10 @@ public class ExampleMod : Mod {
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
-        texturePacker.Add(content.Load<Texture2D>("CustomTops"), r => this.customTops = new UniformTextureAtlas(r, 4, 8));
-        texturePacker.Add(content.Load<Texture2D>("CustomHairs"), r => this.customHairs = new UniformTextureAtlas(r, 4, 6));
-        texturePacker.Add(content.Load<Texture2D>("CustomBottomsShoes"), r => this.customBottoms = new UniformTextureAtlas(r, 8, 6));
-        texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomTops"), 4, 8), r => this.customTops = r);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 6), r => this.customHairs = r);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomBottomsShoes"), 8, 6), r => this.customBottoms = r);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r);
         // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
         WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, texturePacker, r => this.wallpaperTextures = r);
     }
