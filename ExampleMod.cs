@@ -127,7 +127,7 @@ public class ExampleMod : Mod {
     // in general, options should be stored in the ModInfo.OptionsFile file that is given to the mod by the game
     public override void PopulateOptions(Group group, ModInfo info) {
         group.AddChild(new Paragraph(Anchor.AutoLeft, 1, _ => $"{Localization.Get(LnCategory.Ui, "ExampleMod.DarkShirtSpeedOption")}: {ExampleMod.Options.DarkShirtSpeedIncrease}"));
-        group.AddChild(new Slider(Anchor.AutoLeft, new Vector2(1, 12), 5, 5) {
+        group.AddChild(new Slider(Anchor.AutoLeft, new Vector2(1, 10), 5, 5) {
             CurrentValue = ExampleMod.Options.DarkShirtSpeedIncrease,
             OnValueChanged = (_, v) => {
                 ExampleMod.Options.DarkShirtSpeedIncrease = v;
