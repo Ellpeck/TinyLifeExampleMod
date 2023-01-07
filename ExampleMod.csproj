@@ -12,6 +12,7 @@
         <PackageReference Include="MLEM.Data" Version="6.1.0-629" />
         <PackageReference Include="MLEM.Extended" Version="6.1.0-629" />
         <PackageReference Include="MLEM.Startup" Version="6.1.0-629" />
+        <!-- TODO remove this dep in the next update! -->
         <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.263" />
