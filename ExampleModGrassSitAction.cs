@@ -16,7 +16,7 @@ public class ExampleModGrassSitAction : MultiAction {
 
     protected override IEnumerable<Action> CreateFirstActions() {
         // we want to walk to the location clicked, so we use the current action info
-        yield return ActionType.GoHere.Construct(this.Info);
+        yield return ActionType.GoHere.Construct<Action>(this.Info);
 
         // if multiple things should be done before starting this action, they can all be returned here
     }

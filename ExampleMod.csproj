@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLifeApi" Version="0.29.5" />
+        <PackageReference Include="TinyLifeApi" Version="0.30.0" />
 
         <PackageReference Include="ExtremelySimpleLogger" Version="1.2.5" />
         <PackageReference Include="Lib.Harmony" Version="2.2.1" />
