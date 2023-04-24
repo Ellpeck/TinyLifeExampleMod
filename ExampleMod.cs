@@ -49,10 +49,17 @@ public class ExampleMod : Mod {
 
         // adding custom clothing
         var darkShirt = new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
-            this.customTops, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
-            100, // the price
-            ClothesIntention.Everyday | ClothesIntention.Workout, // the clothes item's use cases
-            ColorScheme.WarmDark) {Icon = this.Icon};
+            // the top left in-world region
+            // additional regions will be auto-gathered from the atlas according to the rules described in https://docs.tinylifegame.com/articles/creating_textures.html
+            this.customTops, new Point(0, 0),
+            // the price
+            100,
+            // the clothes item's use cases
+            ClothesIntention.Everyday | ClothesIntention.Workout,
+            // the clothes item's color scheme
+            // if the item should have multiple layers, multiple color schemes can be supplied here (see docs above)
+            ColorScheme.WarmDark
+        ) {Icon = this.Icon};
         Clothes.Register(darkShirt);
         // adding some more custom clothing
         Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms, new Point(4, 0), 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
