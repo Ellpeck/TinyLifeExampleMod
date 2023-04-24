@@ -106,8 +106,8 @@ public class ExampleMod : Mod {
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomTops"), 4, 8), r => this.customTops = r);
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 6), r => this.customHairs = r);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomTops"), 4, 11), r => this.customTops = r);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 5), r => this.customHairs = r);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomBottomsShoes"), 8, 6), r => this.customBottoms = r);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r);
         // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
