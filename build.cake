@@ -43,7 +43,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
         using (var stream = new FileStream(log, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
             using (var reader = new StreamReader(stream)) {
                 var lastPos = 0L;
-                while (!process.HasExited) {
+                do {
                     if (reader.BaseStream.Length > lastPos) {
                         reader.BaseStream.Seek(lastPos, SeekOrigin.Begin);
                         string line;
@@ -52,7 +52,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
                         lastPos = reader.BaseStream.Position;
                     }
                     Thread.Sleep(10);
-                }
+                } while (!process.HasExited);
             }
         }
     }
