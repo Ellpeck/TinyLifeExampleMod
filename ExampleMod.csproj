@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLifeApi" Version="0.32.0" />
+        <PackageReference Include="TinyLifeApi" Version="0.32.1" />
 
         <PackageReference Include="ExtremelySimpleLogger" Version="1.2.5" />
         <PackageReference Include="Lib.Harmony" Version="2.2.1" />
