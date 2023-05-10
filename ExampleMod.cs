@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using ExtremelySimpleLogger;
 using MLEM.Data;
 using MLEM.Data.Content;
@@ -13,6 +15,7 @@ using TinyLife.Mods;
 using TinyLife.Objects;
 using TinyLife.Utilities;
 using TinyLife.World;
+using Action = TinyLife.Actions.Action;
 
 namespace ExampleMod;
 
@@ -20,7 +23,7 @@ public class ExampleMod : Mod {
 
     // the logger that we can use to log info about this mod
     public static Logger Logger { get; private set; }
-    public static ExampleModOptions Options { get; private set; }
+    public static ExampleOptions Options { get; private set; }
 
     public static EmotionModifier GrassSittingModifier { get; private set; }
 
@@ -40,7 +43,7 @@ public class ExampleMod : Mod {
         FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
             // specify the type that should be constructed when this furniture type is placed
             // if this is not specified, the  Furniture class is used, which is used for furniture without special animations or data
-            ConstructedType = typeof(ExampleModTable),
+            ConstructedType = typeof(ExampleTable),
             // specifying icons for custom clothes and furniture is optional, but using the mod's icon helps users recognize a mod's features
             Icon = this.Icon,
             // allow chairs and plates to be slotted into and onto the table
@@ -78,7 +81,7 @@ public class ExampleMod : Mod {
         };
 
         // adding a simple action: sitting down in the grass, which also gives us a nice emotion modifier
-        ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(ExampleModGrassSitAction)) {
+        ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(ExampleGrassSitAction)) {
             // we set this action to be executable only on grass tiles, not on other ground
             CanExecute = (actionInfo, _) => {
                 if (!actionInfo.Map.IsInBounds(actionInfo.ActionLocation.ToPoint()))
@@ -109,7 +112,7 @@ public class ExampleMod : Mod {
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
         ExampleMod.Logger = logger;
-        ExampleMod.Options = info.LoadOptions(() => new ExampleModOptions());
+        ExampleMod.Options = info.LoadOptions(() => new ExampleOptions());
 
         // loads a texture atlas with the given amount of separate texture regions in the x and y axes
         // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
@@ -142,6 +145,65 @@ public class ExampleMod : Mod {
                 info.SaveOptions(ExampleMod.Options);
             }
         });
+    }
+
+}
+
+// these options are saved and loaded in ExampleMod
+public class ExampleOptions {
+
+    public float DarkShirtSpeedIncrease = 2;
+
+}
+
+// we use a multi action because we want to walk to the location, and then execute the main sitting part
+// see ExampleTable for information on how to store custom action-specific information to disk as well
+public class ExampleGrassSitAction : MultiAction {
+
+    public ExampleGrassSitAction(ActionType type, ActionInfo info) : base(type, info) {}
+
+    protected override IEnumerable<Action> CreateFirstActions() {
+        // we want to walk to the location clicked, so we use the current action info
+        yield return ActionType.GoHere.Construct<Action>(this.Info);
+    }
+
+    protected override void AndThenUpdate(GameTime time, TimeSpan passedInGame, float speedMultiplier) {
+        base.AndThenUpdate(time, passedInGame, speedMultiplier);
+        // set our person to look like they're sitting on the ground
+        this.Person.CurrentPose = Pose.SittingGround;
+
+        // restore need and lower emotions
+        this.Person.RestoreNeed(NeedType.Energy, 0.5F, this.Info, speedMultiplier);
+        this.Person.LowerEmotion(EmotionType.Uncomfortable, 0.0001F, speedMultiplier);
+    }
+
+    protected override CompletionType AndThenIsCompleted() {
+        // we want to complete our action once 10 minutes of sitting time have passed
+        return this.CompleteIfTimeUp(TimeSpan.FromMinutes(10));
+    }
+
+    protected override void AndThenOnCompleted(CompletionType type) {
+        base.AndThenOnCompleted(type);
+        // this method is called when the action completes in any way, even if it fails
+        if (type == CompletionType.Completed) {
+            // once we're finished sitting, we want to get a nice emotion modifier for it
+            this.Person.AddEmotion(ExampleMod.GrassSittingModifier, 2, TimeSpan.FromHours(1), this.Type);
+        }
+    }
+
+}
+
+// note that having a custom class for a furniture item like this is entirely optional
+// but it allows for additional functionalities as displayed in this example
+public class ExampleTable : Furniture {
+
+    // anything whose base classes have the DataContract attribute automatically gets saved and loaded to and from disk
+    // this means that you can add custom DataMember members to have them saved and loaded
+    [DataMember]
+    public float TestValue;
+
+    public ExampleTable(Guid id, FurnitureType type, int[] colors, Map map, Vector2 pos) : base(id, type, colors, map, pos) {
+        this.TestValue = Furniture.Random.NextSingle();
     }
 
 }
