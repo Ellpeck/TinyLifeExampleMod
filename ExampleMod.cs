@@ -38,6 +38,21 @@ public class ExampleMod : Mod {
     private Dictionary<Point, TextureRegion> uiTextures;
     private Dictionary<Point, TextureRegion> wallpaperTextures;
 
+    public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
+        ExampleMod.Logger = logger;
+        ExampleMod.Options = info.LoadOptions(() => new ExampleOptions());
+
+        // loads a texture atlas with the given amount of separate texture regions in the x and y axes
+        // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
+        // additionally, we pad all texture regions by 1 pixel, so that rounding errors during rendering don't cause visual artifacts
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomTops"), 4, 11), r => this.customTops = r, 1, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 5), r => this.customHairs = r, 1, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomBottomsShoes"), 8, 6), r => this.customBottoms = r, 1, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r, 1, true);
+        // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
+        WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, texturePacker, r => this.wallpaperTextures = r);
+    }
+
     public override void AddGameContent(GameImpl game, ModInfo info) {
         // adding a custom furniture item
         FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
@@ -108,21 +123,6 @@ public class ExampleMod : Mod {
 
         // adding a custom wallpaper (we're using the top left texture region, which is why we pass 0, 0 as the texture coordinate)
         Wallpaper.Register("ExampleMod.CrossedWallpaper", 15, this.wallpaperTextures, new Point(0, 0), ColorScheme.Modern, this.Icon);
-    }
-
-    public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
-        ExampleMod.Logger = logger;
-        ExampleMod.Options = info.LoadOptions(() => new ExampleOptions());
-
-        // loads a texture atlas with the given amount of separate texture regions in the x and y axes
-        // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
-        // additionally, we pad all texture regions by 1 pixel, so that rounding errors during rendering don't cause visual artifacts
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomTops"), 4, 11), r => this.customTops = r, 1, true);
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 5), r => this.customHairs = r, 1, true);
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomBottomsShoes"), 8, 6), r => this.customBottoms = r, 1, true);
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r, 1, true);
-        // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
-        WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, texturePacker, r => this.wallpaperTextures = r);
     }
 
     public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info) {
