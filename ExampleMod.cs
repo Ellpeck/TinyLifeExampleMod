@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using ExtremelySimpleLogger;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MLEM.Data;
 using MLEM.Data.Content;
 using MLEM.Textures;
