@@ -77,15 +77,18 @@ public class ExampleMod : Mod {
             100,
             // the clothes item's use cases
             ClothesIntention.Everyday | ClothesIntention.Workout,
+            // the clothes item's style preferences, which influence randomly generated tinies slightly
+            // neutral style preferences have the same chance to be picked for all tinies, others have a 25% chance for mismatched preferences
+            StylePreference.Neutral,
             // the clothes item's color scheme
             // if the item should have multiple layers, multiple color schemes can be supplied here (see docs above)
             ColorScheme.WarmDark
         ) {Icon = this.Icon};
         Clothes.Register(darkShirt);
         // adding some more custom clothing
-        Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms, new Point(4, 0), 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
-        Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms, new Point(0, 0), 100, ClothesIntention.Everyday, ColorScheme.Pastel) {Icon = this.Icon});
-        Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs, new Point(0, 0), 0, ClothesIntention.None, ColorScheme.Modern) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms, new Point(4, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.Pastel) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms, new Point(0, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.Pastel) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs, new Point(0, 0), 0, ClothesIntention.None, StylePreference.Neutral, ColorScheme.Modern) {Icon = this.Icon});
 
         // adding an event subscription to people
         MapObject.OnEventsAttachable += o => {
