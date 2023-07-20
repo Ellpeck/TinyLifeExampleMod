@@ -105,9 +105,9 @@ public class ExampleMod : Mod {
         ActionType.Register(new ActionType.TypeSettings("ExampleMod.SitOnGrass", ObjectCategory.Ground, typeof(ExampleGrassSitAction)) {
             // we set this action to be executable only on grass tiles, not on other ground
             CanExecute = (actionInfo, _) => {
-                if (!actionInfo.Map.IsInBounds(actionInfo.ActionLocation.ToPoint()))
+                if (!actionInfo.GoalMap.IsInBounds(actionInfo.ActionLocation.ToPoint()))
                     return CanExecuteResult.Hidden;
-                var tile = actionInfo.Map.GetTile(actionInfo.ActionLocation.ToPoint());
+                var tile = actionInfo.GoalMap.GetTile(actionInfo.ActionLocation.ToPoint());
                 // hidden means the action won't be displayed in the ring menu, Valid means the player (or AI) is able to enqueue and execute it
                 return tile.Name.StartsWith("Grass") ? CanExecuteResult.Valid : CanExecuteResult.Hidden;
             },
