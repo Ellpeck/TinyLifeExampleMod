@@ -107,7 +107,7 @@ public class ExampleMod : Mod {
             CanExecute = (actionInfo, _) => {
                 if (!actionInfo.GoalMap.IsInBounds(actionInfo.ActionLocation.ToPoint()))
                     return CanExecuteResult.Hidden;
-                var tile = actionInfo.GoalMap.GetTile(actionInfo.ActionLocation.ToPoint());
+                var tile = actionInfo.GoalMap.GetTile(actionInfo.ActionLocation.ToPoint(), (int) actionInfo.ActionFloor);
                 // hidden means the action won't be displayed in the ring menu, Valid means the player (or AI) is able to enqueue and execute it
                 return tile.Name.StartsWith("Grass") ? CanExecuteResult.Valid : CanExecuteResult.Hidden;
             },
@@ -208,7 +208,7 @@ public class ExampleTable : Furniture {
     [DataMember]
     public float TestValue;
 
-    public ExampleTable(Guid id, FurnitureType type, int[] colors, Map map, Vector2 pos) : base(id, type, colors, map, pos) {
+    public ExampleTable(Guid id, FurnitureType type, int[] colors, Map map, Vector2 pos, float floor) : base(id, type, colors, map, pos, floor) {
         this.TestValue = Furniture.Random.NextSingle();
     }
 
