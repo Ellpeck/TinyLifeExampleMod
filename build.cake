@@ -29,12 +29,12 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     // start the tiny life process
     var exeDir = System.IO.File.ReadAllText($"{tinyLifeDir}/GameDir");
     var process = Process.Start(new ProcessStartInfo($"{exeDir}/Tiny Life") {
-        Arguments = "-v --skip-splash --skip-preloads --debug-saves",
+        Arguments = "-v --skip-splash --skip-preloads --debug-saves --ansi",
         CreateNoWindow = true
     });
 
-    // we wait a bit to make sure the process has generated a new log file, bleh
-    Thread.Sleep(3000);
+    // we wait a bit to make sure the process has generated a new log file
+    Thread.Sleep(1000);
 
     // attach to the newest log file
     var logsDir = $"{tinyLifeDir}/Logs";
