@@ -4,6 +4,7 @@ using System.Threading;
 
 var target = Argument("target", "Run");
 var config = Argument("configuration", "Release");
+var args = Argument("args", "");
 
 var tinyLifeDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Tiny Life";
 
@@ -29,7 +30,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     // start the tiny life process
     var exeDir = System.IO.File.ReadAllText($"{tinyLifeDir}/GameDir");
     var process = Process.Start(new ProcessStartInfo($"{exeDir}/Tiny Life") {
-        Arguments = "-v --skip-splash --skip-preloads --debug-saves --ansi",
+        Arguments = $"-v --skip-splash --skip-preloads --debug-saves --ansi {args}",
         CreateNoWindow = true
     });
 
