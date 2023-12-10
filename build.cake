@@ -34,6 +34,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
         RedirectStandardOutput = true,
         RedirectStandardError = true
     });
+    // make sure the output buffers (which we ignore) don't fill up
     process.BeginOutputReadLine();
     process.BeginErrorReadLine();
 
@@ -48,12 +49,12 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
             using (var reader = new StreamReader(stream)) {
                 var lastPos = 0L;
                 do {
-                    if (reader.BaseStream.Length > lastPos) {
-                        reader.BaseStream.Seek(lastPos, SeekOrigin.Begin);
+                    if (stream.Length > lastPos) {
+                        stream.Seek(lastPos, SeekOrigin.Begin);
                         string line;
                         while ((line = reader.ReadLine()) != null)
                             Information(line);
-                        lastPos = reader.BaseStream.Position;
+                        lastPos = stream.Position;
                     }
                     Thread.Sleep(10);
                 } while (!process.HasExited);
