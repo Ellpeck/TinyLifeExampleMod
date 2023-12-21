@@ -116,7 +116,7 @@ public class ExampleMod : Mod {
                 // we allow the action to be done even if the solved needs aren't low enough on a person
                 CanDoRandomly = true,
                 // the solved needs indicate when the AI should mark this action as important, they don't actually have to match the action's behavior
-                SolvedNeeds = new[] {NeedType.Energy},
+                SolvedNeeds = [NeedType.Energy],
                 // make people more likely to sit down in the grass if they're uncomfortable
                 PassivePriority = p => p.Emotion == EmotionType.Uncomfortable ? 150 : 25
             },
