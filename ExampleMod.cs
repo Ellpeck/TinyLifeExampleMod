@@ -41,6 +41,7 @@ public class ExampleMod : Mod {
     private Dictionary<Point, TextureRegion> customBottoms;
     private Dictionary<Point, TextureRegion> uiTextures;
     private Dictionary<Point, TextureRegion> wallpaperTextures;
+    private Dictionary<Point, TextureRegion> tileTextures;
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {
         ExampleMod.Logger = logger;
@@ -53,6 +54,7 @@ public class ExampleMod : Mod {
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 5), r => this.customHairs = r, 1, true);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomBottomsShoes"), 8, 6), r => this.customBottoms = r, 1, true);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r, 1, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("Tiles"), 4, 2), r => this.tileTextures = r, 1, true);
         // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
         WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, texturePacker, r => this.wallpaperTextures = r);
     }
@@ -130,6 +132,9 @@ public class ExampleMod : Mod {
 
         // adding a custom wallpaper (we're using the top left texture region, which is why we pass 0, 0 as the texture coordinate)
         Wallpaper.Register("ExampleMod.CrossedWallpaper", 15, this.wallpaperTextures, new Point(0, 0), ColorScheme.Modern, this.Icon);
+
+        // adding a custom tile
+        Tile.Register("ExampleMod.CustomTile", 8, this.tileTextures, new Point(0, 0), ColorScheme.Bricks, icon: this.Icon);
     }
 
     public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info) {
