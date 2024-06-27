@@ -152,11 +152,9 @@ public class ExampleMod : Mod {
         group.AddChild(new Paragraph(Anchor.AutoLeft, 1, _ => $"{Localization.Get(LnCategory.Ui, "ExampleMod.DarkShirtSpeedOption")}: {ExampleMod.Options.DarkShirtSpeedIncrease}"));
         group.AddChild(new Slider(Anchor.AutoLeft, new Vector2(1, 10), 5, 5) {
             CurrentValue = ExampleMod.Options.DarkShirtSpeedIncrease,
-            OnValueChanged = (_, v) => {
-                ExampleMod.Options.DarkShirtSpeedIncrease = v;
-                info.SaveOptions(ExampleMod.Options);
-            }
+            OnValueChanged = (_, v) => ExampleMod.Options.DarkShirtSpeedIncrease = v
         });
+        group.OnRemovedFromUi += _ => info.SaveOptions(ExampleMod.Options);
     }
 
 }
