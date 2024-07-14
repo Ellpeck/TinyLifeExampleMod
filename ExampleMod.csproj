@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLifeApi" Version="0.43.2" />
+        <PackageReference Include="TinyLifeApi" Version="0.43.3" />
 
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
         <PackageReference Include="Lib.Harmony" Version="2.3.3" />
