@@ -11,6 +11,7 @@ var projectFile = Argument("project", GetFiles("**/*.csproj").FirstOrDefault());
 
 var project = ParseProject(projectFile, config);
 var outputPath = project.OutputPaths.FirstOrDefault();
+var zipOutputPath = $"{outputPath.GetParent()}/{project.AssemblyName}.zip";
 var tinyLifeDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Tiny Life";
 
 Task("Clean").Does(() => {
@@ -24,11 +25,15 @@ Task("Build").Does(() => {
     });
 });
 
-Task("CopyToMods").IsDependentOn("Build").Does(() => {
+Task("Zip").IsDependentOn("Build").Does(() => {
+    Zip(outputPath, zipOutputPath, GetFiles($"{outputPath}/**/*"));
+    Information($"Created zip archive {zipOutputPath}");
+});
+
+Task("CopyToMods").IsDependentOn("Zip").Does(() => {
     var dir = $"{tinyLifeDir}/Mods/_Dev";
     EnsureDirectoryExists(dir);
-    var files = GetFiles($"bin/{config}/net*/**/*");
-    CopyFiles(files, dir, true);
+    CopyFileToDirectory(zipOutputPath, dir);
 });
 
 Task("Run").IsDependentOn("CopyToMods").Does(() => {
@@ -68,12 +73,6 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     }
 
     Information($"Tiny Life exited with exit code {process.ExitCode}");
-});
-
-Task("Publish").IsDependentOn("Build").Does(() => {
-    var zipLoc = $"{outputPath.GetParent()}/{project.AssemblyName}.zip";
-    Zip(outputPath, zipLoc, GetFiles($"{outputPath}/**/*"));
-    Information($"Published {project.AssemblyName} to {zipLoc}");
 });
 
 RunTarget(target);
