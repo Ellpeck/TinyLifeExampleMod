@@ -1,11 +1,16 @@
+#addin nuget:?package=Cake.Incubator&version=8.0.0
+
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
 var target = Argument("target", "Run");
 var config = Argument("configuration", "Release");
-var args = Argument("args", "");
+var userArgs = Argument("args", "");
+var projectFile = Argument("project", GetFiles("**/*.csproj").FirstOrDefault());
 
+var project = ParseProject(projectFile, config);
+var outputPath = project.OutputPaths.FirstOrDefault();
 var tinyLifeDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Tiny Life";
 
 Task("Clean").Does(() => {
@@ -13,8 +18,8 @@ Task("Clean").Does(() => {
     EnsureDirectoryDoesNotExist($"{tinyLifeDir}/Mods/_Dev");
 });
 
-Task("Build").DoesForEach(GetFiles("**/*.csproj"), p => {
-    DotNetBuild(p.FullPath, new DotNetBuildSettings {
+Task("Build").Does(() => {
+    DotNetBuild(projectFile.FullPath, new DotNetBuildSettings {
         Configuration = config
     });
 });
@@ -30,7 +35,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     // start the tiny life process
     var exeDir = System.IO.File.ReadAllText($"{tinyLifeDir}/GameDir");
     var process = Process.Start(new ProcessStartInfo($"{exeDir}/Tiny Life") {
-        Arguments = $"-v --skip-splash --skip-preloads --debug-saves --ansi {args}",
+        Arguments = $"-v --skip-splash --skip-preloads --debug-saves --ansi {userArgs}",
         RedirectStandardOutput = true,
         RedirectStandardError = true
     });
@@ -65,14 +70,10 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     Information($"Tiny Life exited with exit code {process.ExitCode}");
 });
 
-Task("Publish").IsDependentOn("Build").DoesForEach(() => GetDirectories($"bin/{config}/net*"), d => {
-    var dllFile = GetFiles($"{d}/**/*.dll").FirstOrDefault();
-    if (dllFile == null)
-        throw new Exception($"Couldn't find built mod in {d}");
-    var dllName = System.IO.Path.GetFileNameWithoutExtension(dllFile.ToString());
-    var zipLoc = $"{d.GetParent()}/{dllName}.zip";
-    Zip(d, zipLoc, GetFiles($"{d}/**/*"));
-    Information($"Published {dllName} to {zipLoc}");
+Task("Publish").IsDependentOn("Build").Does(() => {
+    var zipLoc = $"{outputPath.GetParent()}/{project.AssemblyName}.zip";
+    Zip(outputPath, zipLoc, GetFiles($"{outputPath}/**/*"));
+    Information($"Published {project.AssemblyName} to {zipLoc}");
 });
 
 RunTarget(target);
