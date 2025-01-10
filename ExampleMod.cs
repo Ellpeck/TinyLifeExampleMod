@@ -34,7 +34,7 @@ public class ExampleMod : Mod {
     public override string Description => "This is the example mod for Tiny Life!";
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
     public override string IssueTrackerUrl => "https://github.com/Ellpeck/TinyLifeExampleMod/issues";
-    public override string TestedVersionRange => "[0.45.2,0.45.2]";
+    public override string TestedVersionRange => "[0.46.0]";
 
     private Dictionary<Point, TextureRegion> customTops;
     private Dictionary<Point, TextureRegion> customHairs;
@@ -53,10 +53,10 @@ public class ExampleMod : Mod {
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomTops"), 4, 7), r => this.customTops = r, 1, true);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomHairs"), 4, 2), r => this.customHairs = r, 1, true);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("CustomBottomsShoes"), 8, 6), r => this.customBottoms = r, 1, true);
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r, 1, true);
-        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("Tiles"), 4, 2), r => this.tileTextures = r, 1, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r, 1, true, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("Tiles"), 4, 2), r => this.tileTextures = r, 1, true, true);
         // wallpaper textures require special treatment to work with openings, the x and y values are passed to the UniformTextureAtlas constructor
-        WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5, texturePacker, r => this.wallpaperTextures = r);
+        texturePacker.Add(WallMode.ApplyMasks(content.Load<Texture2D>("Wallpapers"), 4, 5), r => this.wallpaperTextures = r, 1, true, true);
     }
 
     public override void AddGameContent(GameImpl game, ModInfo info) {
