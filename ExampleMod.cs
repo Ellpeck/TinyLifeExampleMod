@@ -34,7 +34,7 @@ public class ExampleMod : Mod {
     public override string Description => "This is the example mod for Tiny Life!";
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
     public override string IssueTrackerUrl => "https://github.com/Ellpeck/TinyLifeExampleMod/issues";
-    public override string TestedVersionRange => "[0.46.0,0.46.1]";
+    public override string TestedVersionRange => "[0.46.0,0.46.2]";
 
     private Dictionary<Point, TextureRegion> customTops;
     private Dictionary<Point, TextureRegion> customHairs;
