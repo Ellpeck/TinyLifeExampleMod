@@ -34,7 +34,7 @@ public class ExampleMod : Mod {
     public override string Description => "This is the example mod for Tiny Life!";
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
     public override string IssueTrackerUrl => "https://github.com/Ellpeck/TinyLifeExampleMod/issues";
-    public override string TestedVersionRange => "[0.47.0,0.47.4]";
+    public override string TestedVersionRange => "[0.47.0,0.47.5]";
 
     private Dictionary<Point, TextureRegion> customTops;
     private Dictionary<Point, TextureRegion> customHairs;
@@ -63,7 +63,7 @@ public class ExampleMod : Mod {
         // adding a custom furniture item
         FurnitureType.Register(new FurnitureType.TypeSettings("ExampleMod.CustomTable", new Point(1, 1), ObjectCategory.Table, 150, ColorScheme.SimpleWood) {
             // specify the type that should be constructed when this furniture type is placed
-            // if this is not specified, the  Furniture class is used, which is used for furniture without special animations or data
+            // if this is not specified, the Furniture class is used, which is used for furniture without special animations or data
             ConstructedType = typeof(ExampleTable),
             // specifying icons for custom clothes and furniture is optional, but using the mod's icon helps users recognize a mod's features
             Icon = this.Icon,
