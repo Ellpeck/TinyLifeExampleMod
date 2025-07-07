@@ -37,6 +37,9 @@ Task("CopyToMods").IsDependentOn("Zip").Does(() => {
 });
 
 Task("Run").IsDependentOn("CopyToMods").Does(() => {
+    var logsDir = $"{tinyLifeDir}/Logs";
+    var lastLogs = System.IO.Directory.EnumerateFiles(logsDir).ToHashSet();
+
     // start the tiny life process
     var exeDir = System.IO.File.ReadAllText($"{tinyLifeDir}/GameDir");
     var process = Process.Start(new ProcessStartInfo($"{exeDir}/TinyLife") {
@@ -48,12 +51,16 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     process.BeginOutputReadLine();
     process.BeginErrorReadLine();
 
-    // we wait a bit to make sure the process has generated a new log file
-    Thread.Sleep(1000);
+    // wait for a new log file to be generated
+    string log;
+    do {
+        log = System.IO.Directory.EnumerateFiles(logsDir).FirstOrDefault(l => !lastLogs.Contains(l));
+        if (log != null)
+            break;
+        Thread.Sleep(100);
+    } while (!process.HasExited);
 
-    // attach to the newest log file
-    var logsDir = $"{tinyLifeDir}/Logs";
-    var log = System.IO.Directory.EnumerateFiles(logsDir).OrderByDescending(System.IO.File.GetCreationTime).FirstOrDefault();
+    // attach to the log file
     if (log != null) {
         using (var stream = new FileStream(log, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
             using (var reader = new StreamReader(stream)) {
