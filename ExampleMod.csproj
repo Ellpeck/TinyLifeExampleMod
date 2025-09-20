@@ -2,21 +2,42 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
         <VersionPrefix>0.0.1</VersionPrefix>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLife.ApiReference" Version="0.47.11" />
+        <PackageReference Include="TinyLife.ApiReference" Version="0.47.11">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
 
-        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.2.1105" />
-        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
-        <PackageReference Include="ExtremelySimpleLogger" Version="1.4.1" />
-        <PackageReference Include="MLEM.Data" Version="7.1.1" />
-        <PackageReference Include="MLEM.Extended" Version="7.1.1" />
-        <PackageReference Include="MLEM.Startup" Version="7.1.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="DynamicEnums" Version="2.0.0" />
-        <PackageReference Include="Coroutine" Version="2.1.5" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.2.1105">
+            <ExcludeAssets>runtime;native</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="Lib.Harmony" Version="2.3.3">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="ExtremelySimpleLogger" Version="1.4.1">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="MLEM.Data" Version="7.1.1">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="MLEM.Extended" Version="7.1.1">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="MLEM.Startup" Version="7.1.1">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="DynamicEnums" Version="2.0.0">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="Coroutine" Version="2.1.5">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
