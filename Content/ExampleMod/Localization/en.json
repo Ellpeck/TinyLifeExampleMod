@@ -1,22 +1,22 @@
 {
-    "BuildMode": {
-        "ExampleMod.CustomTable": "Custom Table",
-        "ExampleMod.CrossedWallpaper": "Crossed Wallpaper",
-        "ExampleMod.CustomTile": "Custom Tile"
+    "BuildMode.ExampleMod": {
+        "CustomTable": "Custom Table",
+        "CrossedWallpaper": "Crossed Wallpaper",
+        "CustomTile": "Custom Tile"
     },
-    "Clothes": {
-        "ExampleMod.DarkShirt": "Dark Shirt",
-        "ExampleMod.PastelPants": "Pastel Pants",
-        "ExampleMod.PastelShoes": "Pastel Shoes",
-        "ExampleMod.WeirdHair": "Weird Hair"
+    "Clothes.ExampleMod": {
+        "DarkShirt": "Dark Shirt",
+        "PastelPants": "Pastel Pants",
+        "PastelShoes": "Pastel Shoes",
+        "WeirdHair": "Weird Hair"
     },
-    "Emotions": {
-        "ExampleMod.GrassSitting": "Comfy Green Ground"
+    "Emotions.ExampleMod": {
+        "GrassSitting": "Comfy Green Ground"
     },
-    "Actions": {
-        "ExampleMod.SitOnGrass": "Sit on Grass"
+    "Actions.ExampleMod": {
+        "SitOnGrass": "Sit on Grass"
     },
-    "Ui": {
-        "ExampleMod.DarkShirtSpeedOption": "Dark Shirt Speed"
+    "Ui.ExampleMod": {
+        "DarkShirtSpeedOption": "Dark Shirt Speed"
     }
 }

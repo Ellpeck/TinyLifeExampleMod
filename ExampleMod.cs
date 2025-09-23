@@ -34,7 +34,7 @@ public class ExampleMod : Mod {
     public override string Description => "This is the example mod for Tiny Life!";
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
     public override string IssueTrackerUrl => "https://github.com/Ellpeck/TinyLifeExampleMod/issues";
-    public override string TestedVersionRange => "[0.47.8,0.47.11]";
+    public override string TestedVersionRange => "[0.48.0]";
 
     private Dictionary<Point, TextureRegion> customTops;
     private Dictionary<Point, TextureRegion> customHairs;
@@ -65,8 +65,6 @@ public class ExampleMod : Mod {
             // specify the type that should be constructed when this furniture type is placed
             // if this is not specified, the Furniture class is used, which is used for furniture without special animations or data
             ConstructedType = typeof(ExampleTable),
-            // specifying icons for custom clothes and furniture is optional, but using the mod's icon helps users recognize a mod's features
-            Icon = this.Icon,
             // allow chairs and plates to be slotted into and onto the table
             ObjectSpots = ObjectSpot.TableSpots(new Point(1, 1)).ToArray()
         });
@@ -86,16 +84,16 @@ public class ExampleMod : Mod {
             // the clothes item's color scheme
             // if the item should have multiple layers, multiple color schemes can be supplied here (see docs above)
             ColorScheme.WarmDark
-        ) {Icon = this.Icon};
+        );
         Clothes.Register(darkShirt);
         // adding some more custom clothing
-        Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms, new Point(4, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.Pastel) {Icon = this.Icon});
-        Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms, new Point(0, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.Pastel) {Icon = this.Icon});
-        Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs, new Point(0, 0), 0, ClothesIntention.None, StylePreference.Neutral, ColorScheme.Modern) {Icon = this.Icon});
+        Clothes.Register(new Clothes("ExampleMod.PastelPants", ClothesLayer.Pants, this.customBottoms, new Point(4, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.Pastel));
+        Clothes.Register(new Clothes("ExampleMod.PastelShoes", ClothesLayer.Shoes, this.customBottoms, new Point(0, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.Pastel));
+        Clothes.Register(new Clothes("ExampleMod.WeirdHair", ClothesLayer.Hair, this.customHairs, new Point(0, 0), 0, ClothesIntention.None, StylePreference.Neutral, ColorScheme.Modern));
 
         // adding an event subscription to people
         MapObject.OnEventsAttachable += o => {
-            if (o is Person person) {
+            if (o is PersonLike person) {
                 // changing the walk speed to be doubled if a person is wearing our dark shirt
                 person.OnGetWalkSpeed += (ref float s) => {
                     if (person.CurrentOutfit.Clothes.TryGetValue(ClothesLayer.Shirt, out var shirt) && shirt.Type == darkShirt)
@@ -131,10 +129,10 @@ public class ExampleMod : Mod {
             new EmotionModifier("ExampleMod.GrassSitting", this.uiTextures[new Point(1, 0)], EmotionType.Happy));
 
         // adding a custom wallpaper (we're using the top left texture region, which is why we pass 0, 0 as the texture coordinate)
-        Wallpaper.Register("ExampleMod.CrossedWallpaper", 15, this.wallpaperTextures, new Point(0, 0), ColorScheme.Modern, this.Icon);
+        Wallpaper.Register("ExampleMod.CrossedWallpaper", 15, this.wallpaperTextures, new Point(0, 0), ColorScheme.Modern);
 
         // adding a custom tile
-        Tile.Register("ExampleMod.CustomTile", 8, this.tileTextures, new Point(0, 0), ColorScheme.Bricks, icon: this.Icon);
+        Tile.Register("ExampleMod.CustomTile", 8, this.tileTextures, new Point(0, 0), ColorScheme.Bricks);
     }
 
     public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info) {
