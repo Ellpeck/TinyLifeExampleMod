@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLife.ApiReference" Version="0.48.0">
+        <PackageReference Include="TinyLife.ApiReference" Version="0.48.1">
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
 
@@ -20,13 +20,13 @@
         <PackageReference Include="ExtremelySimpleLogger" Version="1.4.1">
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
-        <PackageReference Include="MLEM.Data" Version="7.1.1">
+        <PackageReference Include="MLEM.Data" Version="8.0.0">
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
-        <PackageReference Include="MLEM.Extended" Version="7.1.1">
+        <PackageReference Include="MLEM.Extended" Version="8.0.0">
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
-        <PackageReference Include="MLEM.Startup" Version="7.1.1">
+        <PackageReference Include="MLEM.Startup" Version="8.0.0">
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
