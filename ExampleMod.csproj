@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="TinyLife.ApiReference" Version="0.48.2">
+        <PackageReference Include="TinyLife.ApiReference" Version="0.48.3">
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
 
