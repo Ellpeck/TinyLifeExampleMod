@@ -34,7 +34,9 @@ public class ExampleMod : Mod {
     public override string Description => "This is the example mod for Tiny Life!";
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
     public override string IssueTrackerUrl => "https://github.com/Ellpeck/TinyLifeExampleMod/issues";
-    public override string TestedVersionRange => "[0.48.0,0.48.6]";
+    // if we don't use apis that changed in game versions after the one we compile against (see ExampleMod.csproj),
+    // we can specify the range of additional, newer game versions that we support through this property
+    public override string TestedVersionRange => "[0.48.0,0.48.5]";
 
     private Dictionary<Point, TextureRegion> customTops;
     private Dictionary<Point, TextureRegion> customHairs;
