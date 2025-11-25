@@ -36,7 +36,7 @@ public class ExampleMod : Mod {
     public override string IssueTrackerUrl => "https://github.com/Ellpeck/TinyLifeExampleMod/issues";
     // if we don't use apis that changed in game versions after the one we compile against (see ExampleMod.csproj),
     // we can specify the range of additional, newer game versions that we support through this property
-    public override string TestedVersionRange => "[0.48.0,0.48.7]";
+    public override string TestedVersionRange => "[0.48.0,0.48.8]";
 
     private Dictionary<Point, TextureRegion> customTops;
     private Dictionary<Point, TextureRegion> customHairs;
