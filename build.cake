@@ -43,7 +43,7 @@ Task("Run").IsDependentOn("CopyToMods").Does(() => {
     // start the tiny life process
     var exeDir = System.IO.File.ReadAllText($"{tinyLifeDir}/GameDir");
     var process = Process.Start(new ProcessStartInfo($"{exeDir}/TinyLife") {
-        Arguments = $"-v --trace-load --skip-splash --skip-preloads --debug-saves --ansi {userArgs}",
+        Arguments = $"-v --trace-load --skip-splash --debug-saves --ansi {userArgs}",
         RedirectStandardOutput = true,
         RedirectStandardError = true
     });
