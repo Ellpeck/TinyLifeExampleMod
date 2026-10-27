@@ -1,4 +1,4 @@
-#addin nuget:?package=Cake.Incubator&version=8.0.0
+#addin nuget:?package=Cake.Incubator&version=11.0.0
 
 using System.Diagnostics;
 using System.Linq;
